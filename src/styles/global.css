@@ -18,7 +18,8 @@
     @apply bg-near-black text-warm-white font-body antialiased;
   }
   html {
-    scroll-behavior: smooth;
+      scroll-behavior: smooth;
+      scroll-snap-type: y proximity;
   }
 }
 
@@ -75,4 +76,18 @@ body {
 
 .nav-links{
   mix-blend-mode: difference;
+}
+
+/* global.css, or wherever your base styles live */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+.float-slow {
+  animation: float 3s ease-in-out infinite;
 }

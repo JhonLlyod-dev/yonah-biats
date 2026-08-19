@@ -11,5 +11,9 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()]
-  }
+  },
+  server: {
+    host: true, // or '0.0.0.0' — binds to all network interfaces
+    port: 4321, // optional, only needed if you want a fixed port
+  },
 });

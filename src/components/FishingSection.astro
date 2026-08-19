@@ -1,0 +1,98 @@
+---
+import { Image } from "astro:assets";
+
+---
+
+<section
+  class="
+    grid
+    min-h-screen
+    bg-warm-white
+    text-near-black
+    lg:grid-cols-2
+  "
+  id="bait"
+>
+  <!-- Image -->
+  <div class="min-h-[420px] lg:min-h-full">
+    <div
+      class="
+        flex h-full min-h-[420px]
+        items-center justify-center
+        bg-steel-gray/20
+      "
+    >
+    <Image
+      src="/fishing.png"
+      alt="Hero Image"
+      width={1200}
+      height={1200}
+      class="h-full w-full object-cover"
+    />
+    </div>
+  </div>
+
+
+  <!-- Content -->
+  <div
+    class="
+      flex
+      items-center
+      px-6 py-16
+      sm:px-10 sm:py-20
+      lg:px-14 lg:py-24
+      xl:px-20
+    "
+  >
+    <div class="max-w-lg">
+
+      <span
+        class="
+          font-supporting
+          text-xs
+          uppercase
+          tracking-[0.15em]
+          text-near-black/50
+        "
+      >
+        Built for the way you fish
+      </span>
+
+      <h2
+        class="
+          mt-5
+          font-heading
+          text-5xl
+          font-bold
+          uppercase
+          leading-[0.9]
+          tracking-[-0.06em]
+          sm:text-6xl
+          lg:text-7xl
+        "
+      >
+        Boat.
+        <br />
+        Kayak.
+        <br />
+        Bank.
+      </h2>
+
+      <p
+        class="
+          mt-8
+          max-w-md
+          font-body
+          text-base
+          leading-7
+          text-near-black/65
+        "
+      >
+        Fish it your way. The Razor is a compact
+        flatside crankbait made for anglers on
+        boats, kayaks, and the bank.
+      </p>
+
+    </div>
+  </div>
+</section>

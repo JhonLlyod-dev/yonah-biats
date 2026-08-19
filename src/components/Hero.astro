@@ -1,0 +1,91 @@
+---
+import { ArrowUpRight } from "lucide-react";
+---
+
+<section
+  id="hero"
+  aria-label="YONAH Razor introduction"
+  class="relative flex min-h-screen flex-col overflow-hidden bg-near-black text-warm-white"
+>
+  <!-- Subtle product glow — decorative only, safe to keep absolute -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute left-1/2 top-[42%] h-[70vw] w-[70vw] max-h-[900px] max-w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-chartreuse/[0.035] blur-[120px]"
+  ></div>
+
+  <!-- Content wrapper: flex-col + justify-between replaces the old absolute-bottom block -->
+  <div class="relative z-10 flex flex-1 flex-col justify-between gap-10 px-5 pb-10 pt-24 sm:px-8 sm:pb-12 sm:pt-28 lg:px-12 lg:pb-14 xl:px-16">
+
+    <!-- Top row: labels + product image -->
+    <div class="flex w-full flex-col items-center gap-6 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+
+      <span class="font-supporting text-[10px] uppercase tracking-[0.18em] text-chartreuse sm:text-xs">
+        Introducing
+        <br />
+        The Razor
+      </span>
+
+      <div class="relative h-[30vh] w-full max-w-[700px] bg-black sm:h-[38vh] sm:w-[45vw] lg:h-[52vh] lg:w-[45vw]">
+        <img
+          src="https://placehold.co/1200x900/0D0D0D/F5F5F2?text=YONAH+RAZOR"
+          alt="YONAH Razor flatside crankbait placeholder"
+          width="900"
+          height="600"
+          loading="eager"
+          fetchpriority="high"
+          class="h-full w-full object-contain"
+        />
+      </div>
+
+      <span class="hidden text-right font-supporting text-[10px] uppercase tracking-[0.16em] text-warm-white/35 sm:block">
+        Flatside Crankbait
+        <br />
+        Pre-Launch / 2026
+      </span>
+
+    </div>
+
+    <!-- Main copy -->
+    <div class="mx-auto w-full max-w-[1600px]">
+
+      <div class="flex flex-col flex-wrap xl:flex-nowrap gap-8 lg:flex-row lg:items-end lg:justify-between">
+
+        <!-- Heading -->
+        <div class="max-w-4xl">
+          <p class="mb-4 font-supporting text-[10px] uppercase tracking-[0.2em] text-warm-white/45">
+            Confidence bait for every angler
+          </p>
+
+          <h1 class="font-heading text-[clamp(2.75rem,9vw,5rem)] font-extrabold uppercase leading-[0.85] tracking-[-0.06em] sm:leading-[0.82] sm:tracking-[-0.07em] flex flex-wrap md:flex-nowrap">
+            Fish
+            <span class="text-chartreuse">with</span>
+            confidence.
+          </h1>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex shrink-0 items-center gap-5 lg:pb-1 xl:pb-2">
+          <a href="#testing" class="btn-anim group">
+            <span>Become a Field Tester</span>
+            <ArrowUpRight
+              size={15}
+              strokeWidth={1.7}
+              className="ml-4 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 sm:ml-6"
+            />
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Short supporting copy -->
+      <div class="mt-6 flex max-w-2xl items-start gap-4 border-t border-warm-white/10 pt-4">
+        <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-chartreuse"></span>
+        <p class="font-body text-xs leading-5 text-warm-white/45 sm:text-sm">
+          A compact, silent flatside crankbait designed for boat, kayak, and bank.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>

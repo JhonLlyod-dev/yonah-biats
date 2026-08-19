@@ -1,0 +1,400 @@
+---
+import {
+  ArrowUpRight,
+  Mail,
+  MapPin,
+} from "lucide-react";
+
+const navigation = [
+  {
+    label: "Razor",
+    href: "#hero",
+  },
+  {
+    label: "The Idea",
+    href: "#idea",
+  },
+  {
+    label: "Features",
+    href: "#features",
+  },
+  {
+    label: "The Bait",
+    href: "#bait",
+  },
+];
+
+const socials = [
+  {
+    label: "Instagram",
+    href: "#",
+  },
+  {
+    label: "Facebook",
+    href: "#",
+  },
+];
+---
+
+<footer class=" text-warm-white border-t border-warm-white/15">
+
+  <!-- Main Footer -->
+  <div
+    class="
+      mx-auto max-w-[1600px]
+      px-5 pt-20
+      sm:px-8 sm:pt-24
+      lg:px-12 lg:pt-28
+      xl:px-16
+      pb-8
+    "
+  >
+
+    <div
+      class="
+        grid gap-16
+        lg:grid-cols-[1.5fr_0.7fr_0.9fr]
+        lg:gap-20
+      "
+    >
+
+      <!-- Brand -->
+      <div class="max-w-xl">
+
+        <a
+          href="/"
+          aria-label="YONAH Bait Company"
+          class="inline-block"
+        >
+          <img
+            src="/white-brand-logo.webp"
+            alt="YONAH Bait Company"
+            class="h-10 w-26 sm:w-30 object-cover"
+          />
+        </a>
+
+        <p
+          class="
+            mt-7 max-w-md
+            font-body text-sm
+            leading-7
+            text-warm-white/55
+            sm:text-base
+          "
+        >
+          Performance-driven fishing lures
+          designed with purpose.
+        </p>
+
+        <a
+          href="#testing"
+          class="
+            btn-anim group mt-8
+            inline-flex
+            items-center gap-8
+          "
+        >
+          <span>BECOME A FIELD TESTER</span>
+
+          <ArrowUpRight
+            size={16}
+            strokeWidth={1.7}
+            className="
+              transition-transform
+              duration-300
+              group-hover:-translate-y-1
+              group-hover:translate-x-1
+            "
+          />
+        </a>
+
+      </div>
+
+
+      <!-- Navigation -->
+      <div>
+
+        <p
+          class="
+            mb-6
+            font-supporting
+            text-[11px]
+            uppercase
+            tracking-[0.16em]
+            text-steel-gray
+          "
+        >
+          Navigation
+        </p>
+
+        <nav>
+          <ul class="space-y-1">
+
+            {
+              navigation.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class="
+                      group
+                      flex items-center
+                      justify-between
+                      border-b
+                      border-warm-white/10
+                      py-3
+                      font-supporting
+                      text-sm
+                      uppercase
+                      tracking-[0.08em]
+                      text-warm-white/75
+                      transition-colors
+                      duration-200
+                      hover:text-chartreuse
+                    "
+                  >
+                    <span>{item.label}</span>
+
+                    <ArrowUpRight
+                      size={14}
+                      strokeWidth={1.6}
+                      className="
+                        opacity-0
+                        -translate-x-1 translate-y-1
+                        transition-all
+                        duration-200
+                        group-hover:translate-x-0
+                        group-hover:translate-y-0
+                        group-hover:opacity-100
+                      "
+                    />
+                  </a>
+                </li>
+              ))
+            }
+
+          </ul>
+        </nav>
+
+      </div>
+
+
+      <!-- Contact -->
+      <div>
+
+        <p
+          class="
+            mb-6
+            font-supporting
+            text-[11px]
+            uppercase
+            tracking-[0.16em]
+            text-steel-gray
+          "
+        >
+          Contact
+        </p>
+
+        <div class="space-y-5">
+
+          <!-- Email -->
+          <a
+            href="mailto:YOUR-GMAIL@gmail.com"
+            class="
+              group
+              flex items-start gap-3
+              font-body
+              text-sm
+              leading-6
+              text-warm-white/65
+              transition-colors
+              duration-200
+              hover:text-chartreuse
+            "
+          >
+            <Mail
+              size={17}
+              strokeWidth={1.6}
+              className="
+                mt-0.5
+                shrink-0
+                text-steel-gray
+                transition-colors
+                duration-200
+                group-hover:text-chartreuse
+              "
+            />
+
+            <span>
+              sam@thomasmarketing.solutions
+            </span>
+          </a>
+
+
+          <!-- Location -->
+          <div
+            class="
+              flex items-start gap-3
+              font-body
+              text-sm
+              leading-6
+              text-warm-white/65
+            "
+          >
+            <MapPin
+              size={17}
+              strokeWidth={1.6}
+              className="
+                mt-0.5
+                shrink-0
+                text-steel-gray
+              "
+            />
+
+            <span>
+              Atlanta, GA
+            </span>
+          </div>
+
+
+          <!-- Social -->
+          <div
+            class="
+              flex flex-wrap
+              gap-x-5 gap-y-3
+              pt-3
+            "
+          >
+
+            {
+              socials.map((social) => (
+                <a
+                  href={social.href}
+                  aria-label={social.label}
+                  class="
+                    group
+                    inline-flex
+                    items-center gap-2
+                    font-supporting
+                    text-xs
+                    uppercase
+                    tracking-[0.1em]
+                    text-warm-white/55
+                    transition-colors
+                    duration-200
+                    hover:text-chartreuse
+                  "
+                >
+                  {social.label}
+
+                  <ArrowUpRight
+                    size={13}
+                    strokeWidth={1.6}
+                    className="
+                      transition-transform
+                      duration-200
+                      group-hover:-translate-y-0.5
+                      group-hover:translate-x-0.5
+                    "
+                  />
+                </a>
+              ))
+            }
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Brand Statement -->
+<div
+  class="
+    mt-10
+    flex items-center justify-center gap-2
+    border-y border-warm-white/10
+    py-8
+    sm:mt-15 sm:py-10
+    lg:mt-20 lg:py-12
+  "
+>
+  <p
+    class="
+      font-heading
+      text-xl
+      font-bold
+      uppercase
+      leading-none
+      tracking-[-0.04em]
+      sm:text-3xl
+      lg:text-4xl
+  "
+  >
+    Designed to fish.
+  </p>
+
+  <p
+    class="
+      font-heading
+      text-xl
+      font-bold
+      uppercase
+      leading-none
+      tracking-[-0.04em]
+      text-chartreuse
+      sm:text-3xl
+      lg:text-4xl
+    "
+  >
+    Built to last.
+  </p>
+</div>
+
+
+    <!-- Bottom -->
+    <div
+      class="
+        flex flex-col gap-5
+        pt-7
+        font-supporting
+        text-[10px]
+        uppercase
+        tracking-[0.12em]
+        text-warm-white/35
+        sm:flex-row
+        sm:items-center
+        sm:justify-between
+      "
+    >
+
+      <span>
+        © 2026 YONAH BAIT COMPANY
+      </span>
+
+      <!-- <div class="flex items-center gap-5">
+        <a
+          href="/privacy"
+          class="transition-colors hover:text-chartreuse"
+        >
+          Privacy
+        </a>
+
+        <a
+          href="/terms"
+          class="transition-colors hover:text-chartreuse"
+        >
+          Terms
+        </a>
+      </div> -->
+
+      <span class="sm:text-right">
+        Designed to fish. Built to last.
+      </span>
+
+    </div>
+
+  </div>
+
+</footer>

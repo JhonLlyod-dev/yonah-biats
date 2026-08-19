@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-near-black: #0D0D0D;
+  --color-warm-white: #F5F5F2;
+  --color-chartreuse: #CDFF00;
+  --color-steel-gray: #888C8F;
+
+  /* Fonts */
+  --font-heading: "Archivo", sans-serif;
+  --font-supporting: "Roboto Condensed", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-near-black text-warm-white font-body antialiased;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .btn-anim {
+    @apply relative isolate inline-flex items-center justify-center
+      overflow-hidden
+      border border-warm-white/30
+      bg-warm-white
+      px-5 py-3
+      font-supporting
+      text-xs font-medium uppercase tracking-[0.12em]
+      text-near-black
+      cursor-pointer
+      transition-colors duration-300 ease-out;
+  }
+
+  .btn-anim::before {
+    content: "";
+
+    @apply absolute inset-x-0 bottom-0 -z-10
+      h-0
+      isolate
+      bg-chartreuse
+      transition-[height]
+      duration-300
+      ease-[cubic-bezier(0.76,0,0.24,1)];
+  }
+
+  .btn-anim:hover {
+    @apply text-near-black;
+  }
+
+  .btn-anim:hover::before {
+    height: 100%;
+  }
+
+  .btn-anim:focus-visible {
+    @apply outline-2 outline-offset-4 outline-chartreuse;
+  }
+}
+
+html {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none;
+}
+
+.nav-links{
+  mix-blend-mode: difference;
+}

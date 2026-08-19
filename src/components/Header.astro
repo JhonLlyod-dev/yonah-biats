@@ -1,0 +1,223 @@
+---
+import Image from "astro/components/Image.astro";
+import { ArrowUpRight, Menu, X } from "lucide-react";
+
+const nav = [
+  {
+    label: "Razor",
+    href: "#hero",
+  },
+  {
+    label: "The Idea",
+    href: "#idea",
+  },
+  {
+    label: "Features",
+    href: "#features",
+  },
+  {
+    label: "The Bait",
+    href: "#bait",
+  },
+];
+---
+
+<header
+  class="
+    fixed inset-x-0 top-0 z-50
+    
+    px-4 pt-4
+    sm:px-6 sm:pt-5
+    lg:px-8
+    nav-links
+    pb-0
+  "
+>
+  <div
+    class="
+      mx-auto flex max-w-[1600px]
+      items-center justify-between
+      pb-4
+    "
+  >
+
+    <!-- Logo -->
+    <a
+      href="/"
+      aria-label="YONAH Bait Company home"
+      class="shrink-0"
+    >
+      <Image
+        src="/white-logo.webp"
+        alt="YONAH Bait Company"
+        width={120}
+        height={30}
+        loading="eager"
+        class="h-10 w-24 sm:w-28 object-cover"
+      />
+    </a>
+
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden   md:block">
+      <ul class="flex items-center gap-8 lg:gap-10">
+        {
+          nav.map((item) => (
+            <li class="">
+              <a
+                href={item.href}
+                class="
+                  group relative
+                  font-supporting
+                  text-xs
+                  uppercase
+                  tracking-[0.12em]
+                  text-white
+                  transition-colors
+                  duration-200
+                  hover:text-warm-white
+                "
+              >
+                {item.label}
+
+                <span
+                  class="
+                    absolute -bottom-1 left-0
+                    h-px w-0
+                    bg-chartreuse
+                    transition-all
+                    duration-300
+                    group-hover:w-full
+                  "
+                ></span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+
+    <!-- Desktop CTA -->
+    <a
+      href="#testing"
+      class="btn-anim hidden sm:inline-flex group"
+    >
+      <span>Test Razor</span>
+
+      <ArrowUpRight
+        size={15}
+        strokeWidth={1.8}
+        className="ml-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+      />
+    </a>
+
+
+    <!-- Mobile Menu Button -->
+    <button
+      id="mobile-menu-button"
+      type="button"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      class="
+        flex h-10 w-10
+        items-center justify-center
+        border border-warm-white/20
+        text-warm-white
+        transition
+        hover:border-chartreuse
+        hover:text-chartreuse
+        md:hidden
+      "
+    >
+      <Menu size={19} strokeWidth={1.7} />
+    </button>
+
+  </div>
+
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="
+      mx-auto mt-2
+      hidden max-w-[1600px]
+      border border-warm-white/15
+      bg-near-black
+      p-5
+      backdrop-blur-md
+      md:hidden
+    "
+  >
+    <nav>
+      <ul class="flex flex-col">
+
+        {
+          nav.map((item) => (
+            <li class="border-b border-warm-white/10 last:border-0">
+              <a
+                href={item.href}
+                class="
+                  flex items-center
+                  justify-between
+                  py-4
+                  font-supporting
+                  text-sm
+                  uppercase
+                  tracking-[0.12em]
+                  text-warm-white
+                "
+              >
+                <span>{item.label}</span>
+
+                <ArrowUpRight
+                  size={16}
+                  strokeWidth={1.6}
+                  className=" group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
+              </a>
+            </li>
+          ))
+        }
+
+      </ul>
+
+      <a
+        href="#testing"
+        class="btn-anim mt-5 w-full"
+      >
+        Test Razor
+
+        <ArrowUpRight
+          size={15}
+          className="ml-auto transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+        />
+      </a>
+    </nav>
+  </div>
+</header>
+
+
+<script>
+  const button = document.querySelector(
+    "#mobile-menu-button"
+  );
+
+  const menu = document.querySelector(
+    "#mobile-menu"
+  );
+
+  if (button && menu) {
+    button.addEventListener("click", () => {
+      const isOpen =
+        button.getAttribute("aria-expanded") === "true";
+
+      button.setAttribute(
+        "aria-expanded",
+        String(!isOpen)
+      );
+
+      menu.classList.toggle("hidden");
+    });
+  }
+</script>

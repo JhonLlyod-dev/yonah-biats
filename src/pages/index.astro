@@ -1,32 +1,33 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Header from '../components/Header.jsx';
+import Footer from '../components/Footer.jsx';
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import Product from '../components/Product.astro';
 import Contact from '../components/Contact.astro'
 import FishingSection from '../components/FishingSection.astro';
 import Design from '../components/Design.astro';
-import BaitScene from '../components/BaitScene.jsx';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Scene from '../components/BaitScene.jsx';
+import Loader from '../components/Loader.jsx';
 ---
 
 <Layout>
-  <Header />
+  <Loader client:load />
+  <Header client:load />
 
-  <BaitScene client:load />
+  <div id="three-scroll" class="relative h-[300vh] w-full">
+    <!-- ↑ was h-[300vh] — now matches 5 animated sections × 100vh -->
 
-  <div id="bait-scroll-track">
+    <div class="absolute inset-0 z-40">
+      <Scene client:load />
+    </div>
+
     <Hero />
     <Product />
     <Design />
+    <FishingSection />
+    <Contact />
+    <Footer />
   </div>
 
-  <!-- z-30 + opaque bg is what buries the fixed canvas (z-20) as this scrolls up -->
-  <FishingSection />
-
-  <Contact />
-  <Footer />
 </Layout>

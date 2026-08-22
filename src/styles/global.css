@@ -19,7 +19,6 @@
   }
   html {
       scroll-behavior: smooth;
-      scroll-snap-type: y proximity;
   }
 }
 
@@ -74,7 +73,9 @@ body {
   -ms-overflow-style: none;
 }
 
-.nav-links{
+
+
+.desktop-header {
   mix-blend-mode: difference;
 }
 
@@ -90,4 +91,25 @@ body {
 
 .float-slow {
   animation: float 3s ease-in-out infinite;
+}
+
+@keyframes loader-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-loader-pulse {
+  animation: loader-pulse 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-loader-pulse {
+    animation: none;
+  }
 }

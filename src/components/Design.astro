@@ -1,81 +1,190 @@
-<section id="features" class="feature-section min-h-screen snap-start relative overflow-hidden bg-near-black px-5 py-20 text-warm-white sm:px-8 sm:py-28 lg:px-12 lg:py-32 xl:px-16">
+<section
+  id="features"
+  class="feature-section relative min-h-screen overflow-hidden bg-near-black px-5 py-20 text-warm-white sm:px-8 sm:py-24 lg:px-12 lg:py-28 xl:px-16"
+>
+  <div
+    class="relative z-10 mx-auto flex min-h-[calc(100vh-10rem)] max-w-[1600px] flex-col"
+  >
 
-  <div class="relative z-10 mx-auto max-w-[1600px]">
+    <!-- TOP ROW -->
+    <div class="flex items-start justify-between">
+      <p
+        class="font-supporting text-[10px] uppercase tracking-[0.2em] text-chartreuse sm:text-xs"
+      >
+        KEY FEATURES
+      </p>
 
-    <div class="feature-layout flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
+      <span
+        class="hidden font-supporting text-[10px] uppercase tracking-[0.2em] text-warm-white/30 sm:block sm:text-xs"
+      >
+        01 — 03
+      </span>
+    </div>
 
-      <!-- Content, left -->
-      <div class="flex flex-1 flex-col gap-12">
 
-        <div class="feature-heading">
-          <p class="eyebrow font-supporting text-[10px] uppercase tracking-[0.2em] text-chartreuse sm:text-xs">
-            KEY FEATURES
+    <!-- MAIN COMPOSITION -->
+    <div
+      class="grid flex-1 items-center gap-12 py-14 lg:grid-cols-[0.8fr_1.4fr_0.8fr] lg:gap-8 lg:py-10"
+    >
+
+      <!-- LEFT CONTENT -->
+      <div class="flex flex-col justify-center">
+
+        <h2
+          class="max-w-md font-heading text-[clamp(3rem,6vw,5.5rem)] font-extrabold uppercase leading-[0.82] tracking-[-0.06em]"
+        >
+          SIMPLE BY
+          <br />
+          <span class="text-chartreuse">DESIGN.</span>
+        </h2>
+
+        <div class="mt-8 max-w-xs border-t border-warm-white/10 pt-5">
+          <p
+            class="font-body hidden md:block text-sm leading-6 text-warm-white/45 sm:text-base sm:leading-7"
+          >
+            Everything you need. Nothing you don't.
+            Razor is built around a simpler approach to
+            crankbait fishing.
           </p>
-
-          <h2 class="mt-4 font-heading text-[clamp(2.25rem,6vw,3.5rem)] font-extrabold uppercase leading-[0.88] tracking-[-0.05em]">
-            SIMPLE BY
-            <br />
-            DESIGN.
-          </h2>
-        </div>
-
-        <div class="feature-grid flex flex-col gap-6">
-
-          <article class="feature-card flex gap-5 border-t border-warm-white/10 pt-6">
-            <span class="feature-number font-supporting text-xs text-chartreuse">01</span>
-
-            <div>
-              <h3 class="font-heading text-sm uppercase tracking-wide">THIN PROFILE</h3>
-              <p class="mt-2 font-body text-sm leading-6 text-warm-white/55">
-                A compact flatside profile built around a small presentation.
-              </p>
-            </div>
-          </article>
-
-          <article class="feature-card flex gap-5 border-t border-warm-white/10 pt-6">
-            <span class="feature-number font-supporting text-xs text-chartreuse">02</span>
-
-            <div>
-              <h3 class="font-heading text-sm uppercase tracking-wide">SILENT</h3>
-              <p class="mt-2 font-body text-sm leading-6 text-warm-white/55">
-                No rattles. No unnecessary noise.
-              </p>
-            </div>
-          </article>
-
-          <article class="feature-card flex gap-5 border-t border-warm-white/10 pt-6">
-            <span class="feature-number font-supporting text-xs text-chartreuse">03</span>
-
-            <div>
-              <h3 class="font-heading text-sm uppercase tracking-wide">SINGLE-PIECE BODY</h3>
-              <p class="mt-2 font-body text-sm leading-6 text-warm-white/55">
-                A solid one-piece body built for simplicity and consistency.
-              </p>
-            </div>
-          </article>
-
         </div>
 
       </div>
 
-      <!-- Image placeholder, right, with glow scoped behind it -->
-      <div class="relative w-full shrink-0 lg:w-[45%]">
 
-        <!-- Glow, confined to this wrapper, sits behind the image -->
+      <!-- CENTER / 3D BAIT -->
+      <div
+        class="relative flex h-[35vh] min-h-[280px] items-center justify-center lg:h-[55vh]"
+      >
+
+        <!-- Ambient glow -->
         <div
           aria-hidden="true"
-          class="pointer-events-none absolute left-1/2 top-1/2 h-[60vw] w-[60vw] max-h-[600px] max-w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-chartreuse/[0.06] blur-[100px]"
+          class="pointer-events-none absolute left-1/2 top-1/2 h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-chartreuse/[0.08] blur-[90px] sm:h-[380px] sm:w-[380px] lg:h-[480px] lg:w-[480px]"
         ></div>
 
-        <div class="relative h-[38vh] w-full bg-transparent sm:h-[46vh] lg:h-[60vh]">
-          <!-- For 3d graphics -->
-           <img src="/yonah-bait.jpeg" alt="" class="h-full w-full object-cover md:hidden">
+        <!-- Subtle radial rings -->
+        <div
+          aria-hidden="true"
+          class="pointer-events-none absolute left-1/2 top-1/2 h-[220px] w-[220px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-chartreuse/[0.08] sm:h-[300px] sm:w-[300px] lg:h-[400px] lg:w-[400px]"
+        ></div>
+
+        <div
+          aria-hidden="true"
+          class="pointer-events-none absolute left-1/2 top-1/2 h-[160px] w-[160px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-chartreuse/[0.06] sm:h-[220px] sm:w-[220px] lg:h-[300px] lg:w-[300px]"
+        ></div>
+
+        <!-- 3D GRAPHIC -->
+        <div
+          class="relative z-10 h-[260px] w-full max-w-[320px] bg-transparent sm:h-[320px] sm:max-w-[380px] lg:h-[400px] lg:max-w-[440px]"
+        >
+          <!-- For 3D graphics -->
         </div>
 
       </div>
+
+
+      <!-- RIGHT FEATURE -->
+      <article
+        class="feature-card group border-t border-warm-white/10 pt-5 lg:self-center"
+      >
+        <div class="flex items-start justify-between gap-4">
+          <span
+            class="font-supporting text-xs tracking-[0.15em] text-chartreuse"
+          >
+            01
+          </span>
+
+          <span
+            class="font-supporting text-[9px] uppercase tracking-[0.15em] text-warm-white/25"
+          >
+            PROFILE
+          </span>
+        </div>
+
+        <h3
+          class="mt-6 font-heading text-lg font-bold uppercase tracking-[-0.02em]"
+        >
+          RAZOR-THIN PROFILE
+        </h3>
+
+        <p
+          class="mt-3 max-w-xs font-body text-sm leading-6 text-warm-white/45"
+        >
+          An exceptionally thin body built for a compact,
+          searching action.
+        </p>
+      </article>
+
+    </div>
+
+
+    <!-- BOTTOM FEATURES -->
+    <div
+      class="grid border-t border-warm-white/10 lg:grid-cols-2"
+    >
+
+      <!-- FEATURE 02 -->
+      <article
+        class="feature-card border-b border-warm-white/10 py-6 sm:py-7 lg:border-b-0 lg:border-r lg:pr-12"
+      >
+        <div class="flex items-start gap-6">
+
+          <span
+            class="font-supporting text-xs tracking-[0.15em] text-chartreuse"
+          >
+            02
+          </span>
+
+          <div>
+            <h3
+              class="font-heading text-sm font-bold uppercase tracking-wide"
+            >
+              QUIET BY DESIGN
+            </h3>
+
+            <p
+              class="mt-2 max-w-sm font-body text-sm leading-6 text-warm-white/45"
+            >
+              No rattles. No unnecessary noise. Just a subtle
+              presentation.
+            </p>
+          </div>
+
+        </div>
+      </article>
+
+
+      <!-- FEATURE 03 -->
+      <article
+        class="feature-card py-6 sm:py-7 lg:pl-12"
+      >
+        <div class="flex items-start gap-6">
+
+          <span
+            class="font-supporting text-xs tracking-[0.15em] text-chartreuse"
+          >
+            03
+          </span>
+
+          <div>
+            <h3
+              class="font-heading text-sm font-bold uppercase tracking-wide"
+            >
+              CONFIDENCE BAIT
+            </h3>
+
+            <p
+              class="mt-2 max-w-sm font-body text-sm leading-6 text-warm-white/45"
+            >
+              A dependable crankbait for the days when you
+              don't know exactly what the fish want.
+            </p>
+          </div>
+
+        </div>
+      </article>
 
     </div>
 
   </div>
-
 </section>

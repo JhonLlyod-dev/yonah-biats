@@ -1,100 +1,127 @@
 ---
 import { Image } from "astro:assets";
-
 ---
 
 <section
-  class="
-    relative
-    z-30    
-    grid
-    min-h-screen snap-center
-    bg-warm-white
-    text-near-black
-    lg:grid-cols-2
-  "
   id="bait"
+  aria-label="Where Razor performs"
+  class="relative z-30 min-h-screen overflow-hidden bg-warm-white text-near-black"
 >
-  <!-- Image -->
-  <div class="min-h-[420px] lg:min-h-full">
+  <div class="grid min-h-screen lg:grid-cols-[0.95fr_1.05fr]">
+
+    <!-- ========================================= -->
+    <!-- IMAGE -->
+    <!-- ========================================= -->
+
     <div
-      class="
-        flex h-full min-h-[420px]
-        items-center justify-center
-        bg-steel-gray/20
-      "
+      class="relative min-h-[55svh] overflow-hidden bg-steel-gray/20 lg:min-h-screen"
     >
-    <Image
-      src="/fishing.png"
-      alt="Hero Image"
-      width={1200}
-      height={1200}
-      class="h-full w-full object-cover"
-    />
+      <!-- Image -->
+      <Image
+        src="/fishing.png"
+        alt="Angler fishing on the water"
+        width={1200}
+        height={1200}
+        class="absolute inset-0 h-full w-full object-cover"
+      />
+
+      <!-- Image overlay -->
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 bg-near-black/[0.08]"
+      ></div>
+
+      <!-- Subtle green glow -->
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute bottom-[-15%] left-[-10%] h-[45%] w-[45%] rounded-full bg-chartreuse/[0.12] blur-[100px]"
+      ></div>
+
+      <!-- Image label -->
+      <div
+        class="absolute bottom-6 left-5 sm:bottom-8 sm:left-8 lg:bottom-10 lg:left-10"
+      >
+        <span
+          class="font-supporting text-[9px] uppercase tracking-[0.2em] text-warm-white/70 sm:text-[10px]"
+        >
+          BUILT TO STAY TIED ON
+        </span>
+      </div>
     </div>
-  </div>
 
 
-  <!-- Content -->
-  <div
-    class="
-      flex
-      items-center
-      px-6 py-16
-      sm:px-10 sm:py-20
-      lg:px-14 lg:py-24
-      xl:px-20
-    "
-  >
-    <div class="max-w-lg">
+    <!-- ========================================= -->
+    <!-- CONTENT -->
+    <!-- ========================================= -->
 
-      <span
-        class="
-          font-supporting
-          text-xs
-          uppercase
-          tracking-[0.15em]
-          text-near-black/50
-        "
-      >
-        Built for the way you fish
-      </span>
+    <div
+      class="flex items-center px-6 py-16 sm:px-10 sm:py-20 lg:px-14 lg:py-24 xl:px-20 2xl:px-28"
+    >
+      <div class="w-full max-w-2xl">
 
-      <h2
-        class="
-          mt-5
-          font-heading
-          text-5xl
-          font-bold
-          uppercase
-          leading-[0.9]
-          tracking-[-0.06em]
-          sm:text-6xl
-          lg:text-7xl
-        "
-      >
-        Boat.
-        <br />
-        Kayak.
-        <br />
-        Bank.
-      </h2>
+        <!-- Eyebrow -->
+        <div class="flex items-center gap-3">
+          <span
+            class="h-1.5 w-1.5 rounded-full bg-chartreuse"
+          ></span>
 
-      <p
-        class="
-          mt-8
-          max-w-md
-          font-body
-          text-base
-          leading-7
-          text-near-black/65
-        "
-      >
-        Fish it your way. The Razor is a compact
-        flatside crankbait made for anglers on
-        boats, kayaks, and the bank.
-      </p>
+          <span
+            class="font-supporting text-[10px] uppercase tracking-[0.18em] text-near-black/45 sm:text-xs"
+          >
+            A CONFIDENCE BAIT FOR ANY ANGLER
+          </span>
+        </div>
 
+
+        <!-- Heading -->
+        <h2
+          class="mt-8 font-heading text-[clamp(4rem,8vw,8rem)] font-extrabold uppercase leading-[0.78] tracking-[-0.07em]"
+        >
+          <span class="block">Boat.</span>
+
+          <span class="block">Kayak.</span>
+
+          <span class="block text-chartreuse">Bank.</span>
+        </h2>
+
+
+
+
+        <!-- Supporting copy -->
+        <div class="mt-6 flex max-w-xl items-start gap-4">
+          <span
+            class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-chartreuse"
+          ></span>
+
+          <p
+            class="font-body text-sm leading-6 text-near-black/60 sm:text-base sm:leading-7"
+          >
+            Whether you’re running a pattern from a boat or making the most
+            of one stretch of bank, Razor is built to be the crankbait you
+            can keep tied on when you just need to get bit.
+          </p>
+        </div>
+
+
+        <!-- Bottom meta -->
+        <div
+          class="mt-10 flex items-center justify-between border-t border-near-black/10 pt-5 sm:mt-14"
+        >
+          <span
+            class="font-supporting text-[9px] uppercase tracking-[0.18em] text-near-black/35 sm:text-[10px]"
+          >
+            ONE BAIT
+          </span>
+
+          <span
+            class="font-supporting text-[9px] uppercase tracking-[0.18em] text-near-black/35 sm:text-[10px]"
+          >
+            ANY WATER
+          </span>
+        </div>
+
+      </div>
     </div>
+
   </div>
 </section>

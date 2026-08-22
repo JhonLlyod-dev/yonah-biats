@@ -1,27 +1,51 @@
-// BaitScene.jsx
-import { Suspense, useRef, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useGLTF, Environment, Center } from "@react-three/drei";
+import { useGLTF, Environment } from "@react-three/drei";
+import { useRef, useEffect, useState } from "react";
+import * as THREE from "three";
 
-// Separate keyframe sets per breakpoint — tune each independently
-// since mobile's narrower/taller viewport needs different swing distances.
-const KEYFRAMES_DESKTOP = [
-  { x: 0, y: 0, z: 0, rotY: 0 },
-  { x: -1.2, y: -0.1, z: 1.8, rotY: 0.7 },
-  { x: -1.2, y: 0, z: -1.8, rotY: -4.2 },
+const KEYFRAMES = [
+  { at: 0.00, x: 0, y: -0.3, z: 3.5, rotX: THREE.MathUtils.degToRad(0),   rotY: THREE.MathUtils.degToRad(-90) },
+  { at: 0.50, x: 0, y: -0.7, z: 3.5, rotX: THREE.MathUtils.degToRad(-10), rotY: THREE.MathUtils.degToRad(40) },
+  { at: 1,    x: 0, y: -0.9, z: 3.5, rotX: THREE.MathUtils.degToRad(-15), rotY: THREE.MathUtils.degToRad(-40) },
 ];
 
-const KEYFRAMES_TABLET = [
-  { x: 0, y: 0, z: 0, rotY: 0 },
-  { x: -0.8, y: -0.1, z: 1.2, rotY: 0.7 },
-  { x: -0.8, y: 0, z: -1.2, rotY: -4.2 },
-];
+// ── ASPECT-RATIO-AWARE FRAMING ───────────────────────────────────
+function getResponsiveSettings(width, height) {
+  const aspect = width / height;
 
-const KEYFRAMES_MOBILE = [
-  { x: 0, y: 0, z: 0, rotY: 0 },
-  { x: -0.4, y: -0.05, z: 0.8, rotY: 0.7 },
-  { x: -0.4, y: 0, z: -0.8, rotY: -4.2 },
-];
+  const baseFov = 45;
+  const baseDistance = 8;
+  const baseScale = 1;
+
+  const referenceAspect = 1.6;
+
+  // Raise this floor if the model still looks too small on narrow phones.
+  // 0.35 = can shrink to 35% of base size. Try 0.5–0.65 if it's too small.
+  const narrownessFloor = .8;
+
+  // Direct manual multiplier applied ONLY on top of whatever the aspect
+  // math produces — your main "make mobile bigger/smaller" dial.
+  const mobileScaleBoost = 1.3;
+
+  let distance = baseDistance;
+  let scale = baseScale;
+
+  if (aspect < referenceAspect) {
+    const narrowness = Math.max(aspect / referenceAspect, narrownessFloor);
+
+    distance = baseDistance / narrowness;
+    scale = baseScale * narrowness * mobileScaleBoost;
+  }
+
+  const dpr = width < 768 ? [1, 1.5] : [1, 2];
+
+  return {
+    camera: { position: [0, 0, distance], fov: baseFov },
+    scale,
+    dpr,
+  };
+}
+// ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 function lerp(a, b, t) {
   return a + (b - a) * t;
@@ -31,122 +55,95 @@ function smoothstep(t) {
   return t * t * (3 - 2 * t);
 }
 
-function Bait({ progressRef, scale, keyframes }) {
+function Model({ containerRef, scale }) {
   const group = useRef();
-  const { scene } = useGLTF("/models/razor-bait-optimized.glb");
+  const { nodes, materials } = useGLTF("/models/razor-bait-optimized.glb");
+
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent("yonah:3d-ready"));
+  }, []);
 
   useFrame(() => {
-    if (!group.current) return;
+    if (!group.current || !containerRef.current) return;
 
-    const progress = progressRef.current;
-    const segments = keyframes.length - 1;
-    const scaled = progress * segments;
-    const i = Math.min(Math.floor(scaled), segments - 1);
-    const t = smoothstep(scaled - i);
+    const container = containerRef.current;
+    const rect = container.getBoundingClientRect();
+    const total = rect.height - window.innerHeight;
+    if (total <= 0) return;
 
-    const from = keyframes[i];
-    const to = keyframes[i + 1];
+    const scrolled = -rect.top;
+    const progress = Math.min(Math.max(scrolled / total, 0), 1);
+
+    let i = 0;
+    while (i < KEYFRAMES.length - 2 && progress >= KEYFRAMES[i + 1].at) {
+      i++;
+    }
+
+    const from = KEYFRAMES[i];
+    const to = KEYFRAMES[i + 1];
+    const span = to.at - from.at;
+    const localT = span > 0 ? (progress - from.at) / span : 1;
+    const t = smoothstep(Math.min(Math.max(localT, 0), 1));
 
     group.current.position.x = lerp(from.x, to.x, t);
     group.current.position.y = lerp(from.y, to.y, t);
     group.current.position.z = lerp(from.z, to.z, t);
+    group.current.rotation.x = lerp(from.rotX, to.rotX, t);
     group.current.rotation.y = lerp(from.rotY, to.rotY, t);
   });
 
   return (
-    <group ref={group}>
-      <Center>
-        <primitive object={scene} scale={scale} />
-      </Center>
+    <group ref={group} scale={scale}>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.model.geometry}
+        material={materials.model}
+      />
     </group>
   );
 }
 
-function getResponsiveSettings(width) {
-  if (width < 480) {
-    return {
-      camera: { position: [4.5, 0.4, 0], fov: 42 },
-      scale: 0.8,
-      dpr: [1, 1.5],
-      keyframes: KEYFRAMES_MOBILE,
-    };
-  }
-  if (width < 768) {
-    return {
-      camera: { position: [4.8, 0.35, 0], fov: 38 },
-      scale: 0.9,
-      dpr: [1, 1.5],
-      keyframes: KEYFRAMES_TABLET,
-    };
-  }
-  if (width < 1024) {
-    return {
-      camera: { position: [5, 0.3, 0], fov: 36 },
-      scale: 1,
-      dpr: [1, 2],
-      keyframes: KEYFRAMES_DESKTOP,
-    };
-  }
-  return {
-    camera: { position: [5, 0.3, 0], fov: 35 },
-    scale: 1,
-    dpr: [1, 2],
-    keyframes: KEYFRAMES_DESKTOP,
-  };
-}
+useGLTF.preload("/models/razor-bait-optimized.glb");
 
-export default function BaitScene() {
-  const progressRef = useRef(0);
-  const [buried, setBuried] = useState(false);
+export default function Scene() {
+  const containerRef = useRef(null);
   const [settings, setSettings] = useState(() =>
-    getResponsiveSettings(typeof window !== "undefined" ? window.innerWidth : 1280)
+    getResponsiveSettings(
+      typeof window !== "undefined" ? window.innerWidth : 1280,
+      typeof window !== "undefined" ? window.innerHeight : 800
+    )
   );
 
   useEffect(() => {
-    const track = document.getElementById("bait-scroll-track");
-    if (!track) return;
-
-    const onScroll = () => {
-      const rect = track.getBoundingClientRect();
-      const total = rect.height - window.innerHeight;
-      const scrolled = -rect.top;
-      const p = Math.min(Math.max(scrolled / total, 0), 1);
-      progressRef.current = p;
-      setBuried(p >= 1);
-    };
+    containerRef.current = document.querySelector("#three-scroll");
 
     const onResize = () => {
-      setSettings(getResponsiveSettings(window.innerWidth));
-      onScroll();
+      setSettings(getResponsiveSettings(window.innerWidth, window.innerHeight));
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize);
-    onScroll();
+    // Run once on mount too — fixes any mismatch from SSR/hydration
+    // where the initial state may have been computed before real
+    // window dimensions were available.
+    onResize();
 
+    window.addEventListener("resize", onResize);
+    window.addEventListener("orientationchange", onResize);
     return () => {
-      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
+      window.removeEventListener("orientationchange", onResize);
     };
   }, []);
 
   return (
-    <div
-      className={`pointer-events-none hidden md:block fixed inset-0 z-20 float-slow transition-opacity duration-500 ${
-        buried ? "opacity-0" : "opacity-100"
-      }`}
-    >
+    <div className="pointer-events-none sticky top-0 z-10 h-screen w-full float-slow">
       <Canvas camera={settings.camera} dpr={settings.dpr}>
-        <ambientLight intensity={0.7} />
-        <directionalLight position={[3, 4, 3]} intensity={1.4} />
-        <directionalLight position={[-3, -2, -3]} intensity={0.4} />
-        <Environment preset="studio" />
-        <Suspense fallback={null}>
-          <Bait progressRef={progressRef} scale={settings.scale} keyframes={settings.keyframes} />
-        </Suspense>
+        <ambientLight intensity={1.5} />
+        <directionalLight position={[5, 5, 5]} intensity={3} />
+        <pointLight position={[-3, 4, 10]} intensity={2} />
+        <Environment preset="city" />
+        <Model containerRef={containerRef} scale={settings.scale} />
       </Canvas>
     </div>
   );
 }
-
-useGLTF.preload("/models/razor-bait-optimized.glb");

@@ -1,211 +1,60 @@
 ---
 import "../styles/global.css";
+import Loader from "../components/Loader";
 
 const siteName = "YONAH Bait Company";
 const siteUrl = "https://yonahbaits.com";
-
-// Temporary images — replace these when the final assets are ready.
 const ogImage = `${siteUrl}/og-image.jpg`;
-
 const title = "YONAH Bait Company | Confidence Bait for Every Angler";
-
-const description =
-  "YONAH Bait Company creates purpose-built fishing lures designed to give anglers confidence on the water. Meet the Razor, a compact, silent flatside crankbait built for versatility.";
-
-const keywords = [
-  "YONAH Bait Company",
-  "YONAH Baits",
-  "Razor crankbait",
-  "flatside crankbait",
-  "fishing lures",
-  "bass fishing lures",
-  "finesse crankbait",
-  "silent crankbait",
-  "flatside crankbait",
-  "fishing bait",
-];
-
+const description = "YONAH Bait Company creates purpose-built fishing lures designed to give anglers confidence on the water. Meet the Razor, a compact, silent flatside crankbait built for versatility.";
+const keywords = ["YONAH Bait Company", "YONAH Baits", "Razor crankbait", "flatside crankbait", "fishing lures", "bass fishing lures", "finesse crankbait", "silent crankbait", "fishing bait"];
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Basic -->
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords.join(", ")} />
+    <meta name="author" content={siteName} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#0D0D0D" />
+    <meta name="color-scheme" content="dark" />
 
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
 
-    <meta
-      name="description"
-      content={description}
-    />
-
-    <meta
-      name="keywords"
-      content={keywords.join(", ")}
-    />
-
-    <meta
-      name="author"
-      content={siteName}
-    />
-
-    <meta
-      name="generator"
-      content={Astro.generator}
-    />
-
-    <meta
-      name="theme-color"
-      content="#0D0D0D"
-    />
-
-    <meta
-      name="color-scheme"
-      content="dark"
-    />
-
-
-    <!-- Canonical -->
-    <link
-      rel="canonical"
-      href={canonicalURL}
-    />
-
-
-    <!-- Title -->
     <title>{title}</title>
 
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="YONAH Bait Company — fishing lures designed for confidence on the water" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
 
-    <!-- Favicon -->
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="/favicon.svg"
-    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="YONAH Bait Company — fishing lures designed for confidence on the water" />
 
-    <link
-      rel="icon"
-      href="/favicon.ico"
-    />
-
-    <link
-      rel="apple-touch-icon"
-      href="/apple-touch-icon.png"
-    />
-
-
-    <!-- =========================
-         OPEN GRAPH
-    ========================== -->
-
-    <meta
-      property="og:type"
-      content="website"
-    />
-
-    <meta
-      property="og:site_name"
-      content={siteName}
-    />
-
-    <meta
-      property="og:title"
-      content={title}
-    />
-
-    <meta
-      property="og:description"
-      content={description}
-    />
-
-    <meta
-      property="og:url"
-      content={canonicalURL}
-    />
-
-    <meta
-      property="og:image"
-      content={ogImage}
-    />
-
-    <meta
-      property="og:image:alt"
-      content="YONAH Bait Company — fishing lures designed for confidence on the water"
-    />
-
-    <meta
-      property="og:image:width"
-      content="1200"
-    />
-
-    <meta
-      property="og:image:height"
-      content="630"
-    />
-
-    <meta
-      property="og:locale"
-      content="en_US"
-    />
-
-
-    <!-- =========================
-         TWITTER / X
-    ========================== -->
-
-    <meta
-      name="twitter:card"
-      content="summary_large_image"
-    />
-
-    <meta
-      name="twitter:title"
-      content={title}
-    />
-
-    <meta
-      name="twitter:description"
-      content={description}
-    />
-
-    <meta
-      name="twitter:image"
-      content={ogImage}
-    />
-
-    <meta
-      name="twitter:image:alt"
-      content="YONAH Bait Company — fishing lures designed for confidence on the water"
-    />
-
-
-    <!-- =========================
-         FONTS
-    ========================== -->
-
-    <link
-      rel="preconnect"
-      href="https://fonts.googleapis.com"
-    />
-
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin
-    />
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500&family=Roboto+Condensed:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500&family=Roboto+Condensed:wght@400;500&display=swap" rel="stylesheet" />
   </head>
 
   <body>
+    <!-- <Loader client:load /> -->
+
     <slot />
   </body>
 </html>

@@ -1,58 +1,103 @@
-<section id="idea" class="content-section snap-center intro-section relative overflow-hidden bg-warm-white px-5 py-20 text-near-black sm:px-8 sm:py-28 lg:px-12 lg:py-32 xl:px-16">
-
-  <div class="relative z-10 mx-auto max-w-[1600px]">
-
-    <div class="section-number mb-10 font-supporting text-[10px] uppercase tracking-[0.18em] text-near-black/40 sm:mb-14 sm:text-xs">
+<section
+  id="idea"
+  class="content-section intro-section relative z-10 min-h-screen overflow-hidden bg-warm-white px-5 py-20 text-near-black sm:px-8 sm:py-24 lg:px-12 lg:py-24 xl:px-16"
+>
+  <div
+    class="relative z-10 mx-auto flex min-h-[calc(100vh-10rem)] max-w-[1600px] flex-col"
+  >
+    <!-- SECTION LABEL -->
+    <span
+      class="font-supporting text-[10px] uppercase tracking-[0.18em] text-near-black/40 sm:text-xs"
+    >
       THE IDEA
-    </div>
+    </span>
 
-    <div class="content-layout flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
+    <!-- MAIN CONTENT -->
+    <div
+      class="flex flex-1 flex-col items-center justify-center pt-12 sm:pt-16 lg:pt-8"
+    >
 
-      <!-- Image placeholder, left, with glow scoped behind it -->
-      <div class="relative w-full shrink-0 lg:w-[45%]">
+      <!-- HEADLINE -->
+      <div class="relative z-10 text-center">
+        <h2
+          class="font-heading text-[clamp(3.5rem,8.5vw,8rem)] font-extrabold uppercase leading-[0.82] tracking-[-0.065em]"
+        >
+          <span class="block text-near-black">
+            ONE BAIT.
+          </span>
 
-        <!-- Glow, confined to this wrapper, sits behind the image -->
+          <span class="block text-chartreuse">
+            LESS GUESSWORK.
+          </span>
+        </h2>
+      </div>
+
+      <!-- BAIT / 3D OBJECT -->
+      <div
+        class="relative z-20 mt-8 flex h-[22vh] w-full items-center justify-center sm:mt-10 sm:h-[25vh] lg:mt-8 lg:h-[28vh]"
+      >
+        <!-- Ambient glow -->
         <div
           aria-hidden="true"
-          class="pointer-events-none absolute left-1/2 top-1/2 h-[60vw] w-[60vw] max-h-[600px] max-w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-chartreuse/[0.12] blur-[100px]"
+          class="pointer-events-none absolute left-1/2 top-1/2 h-[260px] w-[260px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-chartreuse/[0.12] blur-[80px] sm:h-[320px] sm:w-[320px]"
         ></div>
 
-        <div class="relative h-[38vh] w-full bg-transparent sm:h-[46vh] lg:h-[60vh]">
-            <!-- For 3d graphics -->
-             <img src="/yonah-bait.jpeg" alt="" class="h-full w-full object-cover md:hidden">
+        <!-- 3D GRAPHIC -->
+        <div
+          class="relative z-10 h-full w-full max-w-[280px] bg-transparent sm:max-w-[340px] lg:max-w-[380px]"
+        >
+          <!-- Your 3D graphics -->
+        </div>
+      </div>
+
+      <!-- DIVIDER / ACCENT -->
+      <div class="mt-6 flex items-center justify-center gap-3 sm:mt-8">
+        <span class="h-px w-12 bg-near-black/10"></span>
+
+        <span
+          class="h-1.5 w-1.5 rounded-full bg-chartreuse"
+        ></span>
+
+        <span class="h-px w-12 bg-near-black/10"></span>
+      </div>
+
+      <!-- BOTTOM COPY -->
+      <div
+        class="mt-8 grid w-full max-w-5xl gap-8 sm:mt-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16"
+      >
+
+        <!-- MAIN STATEMENT -->
+        <div class="max-w-2xl">
+          <p
+            class="font-heading text-2xl font-semibold leading-[1.05] tracking-[-0.03em] sm:text-3xl lg:text-4xl"
+          >
+            Crankbait fishing doesn't need to start with
+            <span class="text-chartreuse">
+              a box full of options.
+            </span>
+          </p>
+        </div>
+
+        <!-- SUPPORTING COPY -->
+        <div
+          class="relative max-w-md border-t border-near-black/10 pt-4 lg:ml-auto"
+        >
+          <div class="flex items-start gap-3">
+            <span
+              class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-chartreuse"
+            ></span>
+
+            <p
+              class="font-body text-sm leading-6 text-near-black/55 sm:text-base sm:leading-7"
+            >
+              Razor's compact profile and tight action make it a dependable
+              choice across a wide range of conditions — the shakeyhead of
+              crankbait fishing.
+            </p>
+          </div>
         </div>
 
       </div>
-
-      <!-- Content, right -->
-      <div class="flex flex-1 flex-col gap-8">
-
-        <div>
-          <p class="eyebrow font-supporting text-[10px] uppercase tracking-[0.2em] text-near-black/60 sm:text-xs">
-            COMPACT FLATSIDE CRANKBAIT
-          </p>
-
-          <h2 class="mt-4 font-heading text-[clamp(2.25rem,6vw,3.5rem)] font-extrabold uppercase leading-[0.88] tracking-[-0.05em]">
-            ONE BAIT.
-            <br />
-            LESS GUESSWORK.
-          </h2>
-        </div>
-
-        <div class="content-copy flex max-w-xl flex-col gap-4">
-          <p class="large-copy font-body text-lg leading-7 text-near-black/80 sm:text-xl sm:leading-8">
-            One crankbait, built to get bit — no box of backups required.
-          </p>
-
-          <p class="font-body text-sm leading-6 text-near-black/55 sm:text-base sm:leading-7">
-            A dependable option for the moments other baits aren't producing.
-          </p>
-        </div>
-
-      </div>
-
     </div>
-
   </div>
-
 </section>

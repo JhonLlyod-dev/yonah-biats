@@ -1,19 +1,11 @@
 import { useEffect, useState } from "react";
 
 export default function Loader() {
-  const [isMobile, setIsMobile] = useState(false);
   const [progress, setProgress] = useState(0);
   const [status, setStatus] = useState("Preparing Razor");
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    const mobile = window.matchMedia("(max-width: 639px)").matches;
-
-    if (mobile) {
-      setIsMobile(true);
-      return;
-    }
-
     const startTime = performance.now();
     const minimumTime = 900;
 
@@ -38,7 +30,10 @@ export default function Loader() {
       if (!pageReady || !modelReady) return;
 
       const elapsed = performance.now() - startTime;
-      const remaining = Math.max(0, minimumTime - elapsed);
+      const remaining = Math.max(
+        0,
+        minimumTime - elapsed
+      );
 
       await new Promise((resolve) =>
         setTimeout(resolve, remaining)
@@ -63,9 +58,16 @@ export default function Loader() {
     };
 
     if (!pageReady) {
-      window.addEventListener("load", handlePageLoad);
+      window.addEventListener(
+        "load",
+        handlePageLoad
+      );
     }
 
+    /*
+     * If the model was already ready before the loader
+     * mounted, don't wait for the event.
+     */
     if (window.__yonahModelReady) {
       modelReady = true;
     }
@@ -75,6 +77,10 @@ export default function Loader() {
       handleModelReady
     );
 
+    /*
+     * Fallback so the loader doesn't stay forever
+     * if the 3D model fails to report ready.
+     */
     const fallback = setTimeout(() => {
       modelReady = true;
       finish();
@@ -84,7 +90,11 @@ export default function Loader() {
       timers.forEach(clearTimeout);
       clearTimeout(fallback);
 
-      window.removeEventListener("load", handlePageLoad);
+      window.removeEventListener(
+        "load",
+        handlePageLoad
+      );
+
       window.removeEventListener(
         "yonah:3d-ready",
         handleModelReady
@@ -92,16 +102,11 @@ export default function Loader() {
     };
   }, []);
 
-  // Don't render anything on mobile
-  if (isMobile) {
-    return null;
-  }
-
   return (
     <div
       aria-label="Loading YONAH"
       role="status"
-      className={`fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-near-black text-warm-white transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${
+      className={`hidden md:flex fixed inset-0 z-999 items-center justify-center overflow-hidden bg-near-black text-warm-white transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${
         loaded
           ? "pointer-events-none invisible opacity-0"
           : "visible opacity-100"
@@ -135,7 +140,9 @@ export default function Loader() {
           <div className="h-px w-full overflow-hidden bg-warm-white/10">
             <div
               className="h-full bg-chartreuse transition-[width] duration-300 ease-out"
-              style={{ width: `${progress}%` }}
+              style={{
+                width: `${progress}%`,
+              }}
             />
           </div>
 

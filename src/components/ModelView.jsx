@@ -130,7 +130,7 @@ function AnimatedModel() {
   const isMobile = size.width < 640;
 
   const responsiveScale = isMobile
-    ? modelScale * 0.8
+    ? modelScale * 0.7
     : modelScale;
 
   useFrame((_, delta) => {

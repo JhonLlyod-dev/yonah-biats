@@ -4,7 +4,7 @@ import Footer from '../components/Footer.jsx';
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import Product from '../components/Product.astro';
-import Contact from '../components/Contact.astro'
+import Contact from '../components/Contact.astro';
 import FishingSection from '../components/FishingSection.astro';
 import Design from '../components/Design.astro';
 import Scene from '../components/BaitScene.jsx';
@@ -13,16 +13,16 @@ import InteractRazorButton from '../components/Try.jsx';
 ---
 
 <Layout>
-  <Loader client:load />
+  <Loader client:media="(min-width: 640px)" />
   <Header client:load />
-  
+
   <InteractRazorButton client:load />
 
   <div id="three-scroll" class="relative h-[300vh] w-full">
-    <!-- ↑ was h-[300vh] — now matches 5 animated sections × 100vh -->
 
+    <!-- Three.js only hydrates on screens 768px and wider -->
     <div class="absolute inset-0 z-40">
-      <Scene client:load />
+      <Scene client:media="(min-width: 768px)" />
     </div>
 
     <Hero />
@@ -31,6 +31,6 @@ import InteractRazorButton from '../components/Try.jsx';
     <FishingSection />
     <Contact />
     <Footer />
-  </div>
 
+  </div>
 </Layout>

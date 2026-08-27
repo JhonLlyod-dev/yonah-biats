@@ -7,6 +7,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 import sitemap from '@astrojs/sitemap';
 
+import vercel from '@astrojs/vercel';
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [react(), sitemap()],
@@ -14,8 +16,11 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
+
   server: {
     host: true, // or '0.0.0.0' — binds to all network interfaces
     port: 4321, // optional, only needed if you want a fixed port
   },
+
+  adapter: vercel(),
 });

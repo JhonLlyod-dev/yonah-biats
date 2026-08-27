@@ -15,12 +15,32 @@ export default function FieldTestForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("YONAH Razor Field Test Application:", formData);
+    try{
+      const response = await fetch("/api/field-test", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    setShowSuccess(true);
+      const result = await response.json();
+      console.log("Success:", JSON.stringify(result));
+
+      if (!response.ok) {
+        throw new Error("Something went wrong");
+      }
+
+      setFormData({ name: "", email: "", social: "", favoriteFlatside: "" });
+
+      setShowSuccess(true);
+
+    }catch(error){
+      console.error(error);
+    }
   };
 
   const closeModal = () => {

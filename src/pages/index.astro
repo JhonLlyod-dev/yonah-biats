@@ -9,11 +9,14 @@ import FishingSection from '../components/FishingSection.astro';
 import Design from '../components/Design.astro';
 import Scene from '../components/BaitScene.jsx';
 import Loader from '../components/Loader.jsx';
+import InteractRazorButton from '../components/Try.jsx';
 ---
 
 <Layout>
   <Loader client:load />
   <Header client:load />
+  
+  <InteractRazorButton client:load />
 
   <div id="three-scroll" class="relative h-[300vh] w-full">
     <!-- ↑ was h-[300vh] — now matches 5 animated sections × 100vh -->

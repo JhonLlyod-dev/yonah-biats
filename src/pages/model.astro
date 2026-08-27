@@ -1,0 +1,172 @@
+---
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import Layout from "../layouts/Layout.astro";
+import ModelView from "../components/ModelView.jsx";
+---
+
+<Layout>
+  <main class="relative min-h-screen overflow-hidden bg-near-black text-warm-white">
+
+    <!-- 3D CANVAS -->
+    <ModelView client:load />
+
+
+    <!-- UI LAYER -->
+    <div class="relative z-50 min-h-screen pointer-events-none">
+
+      <!-- HEADER -->
+      <header class="absolute inset-x-0 top-0 px-5 py-5 sm:px-8 lg:px-12 xl:px-16 pointer-events-auto">
+        <div class="mx-auto flex max-w-[1600px] items-center justify-between">
+
+          <a
+            href="/"
+            class="group flex items-center gap-2 font-supporting text-[10px] uppercase tracking-[0.18em] text-warm-white/50 transition-colors hover:text-warm-white"
+          >
+            <ArrowLeft
+              size={14}
+              strokeWidth={1.5}
+              className="transition-transform duration-300 group-hover:-translate-x-1"
+            />
+
+            Back
+          </a>
+
+          <div class="font-heading text-xl font-extrabold uppercase tracking-[-0.06em]">
+            YONAH
+          </div>
+
+          <span class="hidden font-supporting text-[10px] uppercase tracking-[0.18em] text-warm-white/35 sm:block">
+            Razor / 3D
+          </span>
+
+        </div>
+      </header>
+
+
+      <!-- MAIN CONTENT -->
+      <section class="relative min-h-screen">
+
+        <!-- Background glow -->
+        <div
+          aria-hidden="true"
+          class="pointer-events-none fixed left-1/2 top-1/2 -z-10 h-[70vw] w-[70vw] max-h-[850px] max-w-[850px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-chartreuse/[0.08] blur-[120px]"
+        />
+
+
+        <div class="relative mx-auto flex min-h-screen max-w-[1600px] flex-col px-5 pb-8 pt-24 sm:px-8 sm:pb-10 lg:px-12 xl:px-16">
+
+          <!-- TOP CONTENT -->
+          <div class="pointer-events-none grid grid-cols-1 gap-6 md:grid-cols-12 md:items-end">
+
+            <div class="md:col-span-7">
+
+              <p class="font-supporting text-[9px] uppercase tracking-[0.2em] text-warm-white/40 sm:text-[10px]">
+                Interactive Product View
+              </p>
+
+              <h1 class="mt-3 max-w-4xl font-heading text-[clamp(3rem,8vw,7rem)] font-extrabold uppercase leading-[0.8] tracking-[-0.07em]">
+                Meet
+                <br />
+                <span class="text-chartreuse">Razor.</span>
+              </h1>
+
+            </div>
+
+            <div class="md:col-span-5 md:flex md:justify-end">
+
+              <p class="max-w-sm font-body text-xs leading-5 text-warm-white/50 sm:text-sm sm:leading-6 md:text-right">
+                Get a closer look at the flatside crankbait built around
+                simplicity, confidence, and tight action.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- MODEL GUIDE -->
+          <div class="pointer-events-none absolute inset-0 flex items-center justify-center">
+
+            <div
+              aria-hidden="true"
+              class="absolute left-1/2 top-1/2 h-[min(82vw,700px)] w-[min(82vw,700px)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-warm-white/[0.08]"
+            />
+
+            <div
+              aria-hidden="true"
+              class="absolute left-1/2 top-1/2 h-[min(62vw,520px)] w-[min(62vw,520px)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-warm-white/[0.06]"
+            />
+
+            <div
+              aria-hidden="true"
+              class="absolute left-1/2 top-1/2 h-px w-[min(82vw,700px)] -translate-x-1/2 bg-warm-white/[0.06]"
+            />
+
+            <div
+              aria-hidden="true"
+              class="absolute left-1/2 top-1/2 h-[min(82vw,700px)]] w-px -translate-y-1/2 bg-warm-white/[0.06]"
+            />
+
+          </div>
+
+
+          <!-- DRAG HINT -->
+          <div class="pointer-events-none fixed bottom-23 left-1/2 z-50 -translate-x-1/2 rounded-full border border-warm-white/10 bg-near-black/60 px-4 py-1.5 backdrop-blur-sm">
+            <p class="font-supporting text-[9px] uppercase tracking-[0.18em] text-warm-white/50">
+              Drag to rotate
+            </p>
+          </div>
+
+
+          <!-- BOTTOM CONTENT -->
+          <div class="pointer-events-auto absolute bottom-6 inset-x-0 z-50 mx-8 grid grid-cols-1 gap-6 border-t border-warm-white/10 pt-5 sm:grid-cols-3 sm:gap-8">
+
+            <div>
+              <p class="font-supporting text-[9px] uppercase tracking-[0.16em] text-warm-white/35">
+                Profile
+              </p>
+
+              <p class="mt-1 font-heading text-sm font-bold uppercase tracking-[-0.02em]">
+                Razor Thin
+              </p>
+            </div>
+
+
+            <div>
+              <p class="font-supporting text-[9px] uppercase tracking-[0.16em] text-warm-white/35">
+                Action
+              </p>
+
+              <p class="mt-1 font-heading text-sm font-bold uppercase tracking-[-0.02em]">
+                Tight & Responsive
+              </p>
+            </div>
+
+
+            <div class="sm:flex sm:justify-end">
+
+              <a
+                href="/#testing"
+                class="btn-anim group inline-flex w-full items-center justify-between sm:w-auto"
+              >
+                <span>Become a Field Tester</span>
+
+                <ArrowUpRight
+                  size={15}
+                  strokeWidth={1.7}
+                  className="ml-5 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
+                />
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+</Layout>

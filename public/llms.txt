@@ -1,0 +1,40 @@
+# YONAH
+
+> YONAH makes the Razor, a flatside crankbait built around a simpler
+> approach to crankbait fishing — razor-thin profile, quiet by design,
+> a dependable confidence bait for days when you don't know exactly
+> what the fish want.
+
+YONAH Baits designs fishing lures for anglers who want gear that just
+works. The flagship product is the Razor, a flatside crankbait
+launching in 2026.
+
+## Product
+
+- [Razor Crankbait](https://yonahbaits.com/#hero): Flatside crankbait,
+  pre-launch 2026. Razor-thin profile for a compact, searching action.
+  No rattles, quiet presentation. Built as a confidence bait for
+  uncertain conditions.
+
+## Key Features
+
+- Razor-thin profile — an exceptionally thin body for a compact,
+  searching action
+- Quiet by design — no rattles or unnecessary noise, just a subtle
+  presentation
+- Confidence bait — dependable performance when it's unclear what
+  fish want
+
+## Company
+
+- [Become a Field Tester](https://yonahbaits.com/#testing): Sign up
+  to test the Razor before public launch.
+- [Contact](https://yonahbaits.com/#contact): Get in touch with YONAH.
+
+## Notes for AI/LLM crawlers
+
+This site is a single marketing/pre-launch page for the YONAH Razor
+crankbait. Content is primarily visual/interactive (3D product
+model, scroll-driven sections) — this file summarizes the on-page
+copy for text-based understanding. For the most current product
+details, dates, and availability, refer to the live page directly.

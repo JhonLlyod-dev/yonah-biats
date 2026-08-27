@@ -1,0 +1,116 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
+---
+
+<Layout>
+  <main class="relative flex min-h-screen overflow-hidden bg-near-black text-warm-white">
+
+    <!-- Background glow -->
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute left-1/2 top-1/2 h-[65vw] w-[65vw] max-h-[900px] max-w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-chartreuse/[0.05] blur-[120px]"
+    ></div>
+
+    <!-- Subtle grid -->
+    <div
+      aria-hidden="true"
+      class="absolute inset-0 opacity-[0.03]"
+      style="
+        background-image:
+          linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+        background-size:72px 72px;
+      "
+    ></div>
+
+    <div class="relative z-10 mx-auto flex w-full max-w-[1600px] flex-col justify-between px-5 py-8 sm:px-8 lg:px-12 xl:px-16">
+
+      <!-- Top -->
+      <div class="flex items-center justify-between">
+        <a
+          href="/"
+          class="group flex items-center gap-2 font-supporting text-[10px] uppercase tracking-[0.18em] text-warm-white/45 transition hover:text-warm-white"
+        >
+          <ArrowLeft
+            size={14}
+            strokeWidth={1.6}
+            className="transition-transform duration-300 group-hover:-translate-x-1"
+          />
+
+          Back
+        </a>
+
+        <span class="font-supporting text-[10px] uppercase tracking-[0.18em] text-chartreuse">
+          YONAH / LOST CAST
+        </span>
+      </div>
+
+      <!-- Center -->
+      <section class="flex flex-1 items-center py-20 sm:py-24 lg:py-28">
+        <div class="grid w-full gap-12 lg:grid-cols-12 lg:items-end">
+
+          <!-- Left -->
+          <div class="lg:col-span-8">
+
+            <p class="font-supporting text-[10px] uppercase tracking-[0.2em] text-chartreuse">
+              Error 404
+            </p>
+
+            <h1 class="mt-4 font-heading text-[clamp(5rem,22vw,12rem)] font-extrabold uppercase leading-[0.8] tracking-[-0.08em] text-warm-white/12">
+              404
+            </h1>
+
+            <h2 class="-mt-6 font-heading text-[clamp(2.5rem,7vw,6rem)] font-extrabold uppercase leading-[0.85] tracking-[-0.07em]">
+              YOU CAST
+              <br />
+              TOO FAR.
+            </h2>
+
+          </div>
+
+          <!-- Right -->
+          <div class="lg:col-span-4">
+
+            <div class="border-l border-chartreuse/30 pl-5">
+
+              <p class="font-body text-base leading-7 text-warm-white/60">
+                Looks like this spot came up empty.
+                The page you're looking for isn't here anymore.
+              </p>
+
+            </div>
+
+            <a
+              href="/"
+              class="btn-anim group mt-8 inline-flex w-full items-center justify-between sm:w-auto"
+            >
+              <span>Back to YONAH</span>
+
+              <ArrowUpRight
+                size={15}
+                strokeWidth={1.7}
+                className="ml-6 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
+              />
+            </a>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="border-t border-warm-white/10 pt-5">
+        <div class="flex flex-col gap-3 font-supporting text-[10px] uppercase tracking-[0.16em] text-warm-white/30 sm:flex-row sm:justify-between">
+
+          <span>Razor Flatside Crankbait</span>
+
+          <span>Pre-Launch 2026</span>
+
+        </div>
+      </footer>
+
+    </div>
+
+  </main>
+</Layout>

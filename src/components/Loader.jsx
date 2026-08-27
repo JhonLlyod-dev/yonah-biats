@@ -1,11 +1,19 @@
 import { useEffect, useState } from "react";
 
 export default function Loader() {
+  const [isMobile, setIsMobile] = useState(false);
   const [progress, setProgress] = useState(0);
   const [status, setStatus] = useState("Preparing Razor");
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    const mobile = window.matchMedia("(max-width: 639px)").matches;
+
+    if (mobile) {
+      setIsMobile(true);
+      return;
+    }
+
     const startTime = performance.now();
     const minimumTime = 900;
 
@@ -32,7 +40,9 @@ export default function Loader() {
       const elapsed = performance.now() - startTime;
       const remaining = Math.max(0, minimumTime - elapsed);
 
-      await new Promise((resolve) => setTimeout(resolve, remaining));
+      await new Promise((resolve) =>
+        setTimeout(resolve, remaining)
+      );
 
       setProgress(100);
       setStatus("Ready");
@@ -56,17 +66,15 @@ export default function Loader() {
       window.addEventListener("load", handlePageLoad);
     }
 
-    if (typeof window !== "undefined" && window.__yonahModelReady) {
+    if (window.__yonahModelReady) {
       modelReady = true;
     }
 
-    window.addEventListener("yonah:3d-ready", handleModelReady);
+    window.addEventListener(
+      "yonah:3d-ready",
+      handleModelReady
+    );
 
-    /*
-     * Safety fallback.
-     * Prevents the loader from staying forever if
-     * the 3D model fails to load.
-     */
     const fallback = setTimeout(() => {
       modelReady = true;
       finish();
@@ -77,9 +85,17 @@ export default function Loader() {
       clearTimeout(fallback);
 
       window.removeEventListener("load", handlePageLoad);
-      window.removeEventListener("yonah:3d-ready", handleModelReady);
+      window.removeEventListener(
+        "yonah:3d-ready",
+        handleModelReady
+      );
     };
   }, []);
+
+  // Don't render anything on mobile
+  if (isMobile) {
+    return null;
+  }
 
   return (
     <div
@@ -91,7 +107,7 @@ export default function Loader() {
           : "visible opacity-100"
       }`}
     >
-      {/* Ambient glow — echoes the Hero/Features product glow language */}
+      {/* Ambient glow */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute left-1/2 top-1/2 h-[60vw] w-[60vw] max-h-[600px] max-w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-chartreuse/[0.05] blur-[120px]"

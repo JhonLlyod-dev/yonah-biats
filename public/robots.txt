@@ -1,0 +1,6 @@
+# yonahbaits.com
+
+User-agent: *
+Allow: /
+
+Sitemap: https://yonahbaits.com/sitemap-index.xml

@@ -1,15 +1,15 @@
+
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
 const MODEL_PATH = "/models/yonah.glb";
-
-const MODEL_SCALE_MULTIPLIER = 0.0290;
+const MODEL_SCALE_MULTIPLIER = 0.029;
 
 const KEYFRAMES = [
   {
-    at: 0.0,
+    at: 0,
     x: 0.2,
     y: -0.3,
     z: 3.5,
@@ -39,14 +39,12 @@ function getResponsiveSettings(width, height) {
 
   const baseFov = 45;
   const baseDistance = 8;
-  const baseScale = 1;
-
   const referenceAspect = 1.6;
   const narrownessFloor = 0.8;
   const mobileScaleBoost = 1.3;
 
   let distance = baseDistance;
-  let scale = baseScale;
+  let scale = 1;
 
   if (aspect < referenceAspect) {
     const narrowness = Math.max(
@@ -55,10 +53,8 @@ function getResponsiveSettings(width, height) {
     );
 
     distance = baseDistance / narrowness;
-    scale = baseScale * narrowness * mobileScaleBoost;
+    scale = narrowness * mobileScaleBoost;
   }
-
-  const dpr = width < 768 ? 1 : [1, 1.5];
 
   return {
     camera: {
@@ -66,7 +62,7 @@ function getResponsiveSettings(width, height) {
       fov: baseFov,
     },
     scale,
-    dpr,
+    dpr: width < 768 ? 1 : [1, 1.5],
   };
 }
 
@@ -79,70 +75,47 @@ function smoothstep(t) {
 }
 
 function Model({ scale, scrollProgress }) {
-  const group = useRef();
-
+  const group = useRef(null);
   const { nodes, materials } = useGLTF(MODEL_PATH);
-
-  useEffect(() => {
-    window.dispatchEvent(new CustomEvent("yonah:3d-ready"));
-  }, []);
 
   useFrame(() => {
     if (!group.current) return;
 
     const progress = scrollProgress.current;
 
-    let i = 0;
+    let index = 0;
 
     while (
-      i < KEYFRAMES.length - 2 &&
-      progress >= KEYFRAMES[i + 1].at
+      index < KEYFRAMES.length - 2 &&
+      progress >= KEYFRAMES[index + 1].at
     ) {
-      i++;
+      index++;
     }
 
-    const from = KEYFRAMES[i];
-    const to = KEYFRAMES[i + 1];
+    const from = KEYFRAMES[index];
+    const to = KEYFRAMES[index + 1];
 
     const span = to.at - from.at;
 
-    const localT =
+    const localProgress =
       span > 0
         ? (progress - from.at) / span
         : 1;
 
     const t = smoothstep(
-      Math.min(Math.max(localT, 0), 1)
+      Math.min(Math.max(localProgress, 0), 1)
     );
 
-    group.current.position.x = lerp(
-      from.x,
-      to.x,
-      t
+    group.current.position.set(
+      lerp(from.x, to.x, t),
+      lerp(from.y, to.y, t),
+      lerp(from.z, to.z, t)
     );
 
-    group.current.position.y = lerp(
-      from.y,
-      to.y,
-      t
-    );
-
-    group.current.position.z = lerp(
-      from.z,
-      to.z,
-      t
-    );
-
-    group.current.rotation.x = lerp(
-      from.rotX,
-      to.rotX,
-      t
-    );
-
-    group.current.rotation.y = lerp(
-      from.rotY,
-      to.rotY,
-      t
+    group.current.rotation.set(
+      lerp(from.rotX, to.rotX, t),
+      lerp(from.rotY, to.rotY, t),
+      0
     );
   });
 
@@ -194,43 +167,31 @@ function Model({ scale, scrollProgress }) {
 
       <group position={[-2.283, 22.983, 3.825]}>
         <mesh
-          castShadow
-          receiveShadow
           geometry={nodes.Razor_Website001.geometry}
           material={materials["Material.007"]}
         />
 
         <mesh
-          castShadow
-          receiveShadow
           geometry={nodes.Razor_Website001_1.geometry}
           material={materials["Material.008"]}
         />
 
         <mesh
-          castShadow
-          receiveShadow
           geometry={nodes.Razor_Website001_2.geometry}
           material={materials["Material.009"]}
         />
 
         <mesh
-          castShadow
-          receiveShadow
           geometry={nodes.Razor_Website001_3.geometry}
           material={materials["Material.010"]}
         />
 
         <mesh
-          castShadow
-          receiveShadow
           geometry={nodes.Razor_Website001_4.geometry}
           material={materials["Material.011"]}
         />
 
         <mesh
-          castShadow
-          receiveShadow
           geometry={nodes.Razor_Website001_5.geometry}
           material={materials["Material.012"]}
         />
@@ -243,17 +204,7 @@ export default function Scene() {
   const containerRef = useRef(null);
   const scrollProgress = useRef(0);
 
-  // ----------------------------------------
-  // MOBILE CHECK
-  // ----------------------------------------
-
-  const [isMobile, setIsMobile] = useState(() => {
-    if (typeof window === "undefined") return false;
-
-    return window.matchMedia(
-      "(max-width: 767px)"
-    ).matches;
-  });
+  const [isMobile, setIsMobile] = useState(false);
 
   const [settings, setSettings] = useState(() =>
     getResponsiveSettings(
@@ -266,38 +217,32 @@ export default function Scene() {
     )
   );
 
-  // ----------------------------------------
-  // MOBILE DETECTION
-  // ----------------------------------------
-
+  // Mobile detection
   useEffect(() => {
     const mediaQuery = window.matchMedia(
       "(max-width: 767px)"
     );
 
-    const handleChange = (event) => {
-      setIsMobile(event.matches);
+    const updateMobile = () => {
+      setIsMobile(mediaQuery.matches);
     };
 
-    setIsMobile(mediaQuery.matches);
+    updateMobile();
 
     mediaQuery.addEventListener(
       "change",
-      handleChange
+      updateMobile
     );
 
     return () => {
       mediaQuery.removeEventListener(
         "change",
-        handleChange
+        updateMobile
       );
     };
   }, []);
 
-  // ----------------------------------------
-  // DON'T RUN 3D ON MOBILE
-  // ----------------------------------------
-
+  // Find scroll container
   useEffect(() => {
     if (isMobile) return;
 
@@ -305,10 +250,7 @@ export default function Scene() {
       document.querySelector("#three-scroll");
   }, [isMobile]);
 
-  // ----------------------------------------
-  // SCROLL
-  // ----------------------------------------
-
+  // Scroll tracking
   useEffect(() => {
     if (isMobile) return;
 
@@ -328,10 +270,11 @@ export default function Scene() {
         return;
       }
 
-      const scrolled = -rect.top;
+      const progress =
+        -rect.top / total;
 
       scrollProgress.current = Math.min(
-        Math.max(scrolled / total, 0),
+        Math.max(progress, 0),
         1
       );
     };
@@ -341,9 +284,7 @@ export default function Scene() {
     window.addEventListener(
       "scroll",
       updateScrollProgress,
-      {
-        passive: true,
-      }
+      { passive: true }
     );
 
     return () => {
@@ -354,14 +295,11 @@ export default function Scene() {
     };
   }, [isMobile]);
 
-  // ----------------------------------------
-  // RESIZE
-  // ----------------------------------------
-
+  // Resize handling
   useEffect(() => {
     if (isMobile) return;
 
-    const onResize = () => {
+    const updateSettings = () => {
       setSettings(
         getResponsiveSettings(
           window.innerWidth,
@@ -370,42 +308,25 @@ export default function Scene() {
       );
     };
 
-    onResize();
+    updateSettings();
 
     window.addEventListener(
       "resize",
-      onResize
-    );
-
-    window.addEventListener(
-      "orientationchange",
-      onResize
+      updateSettings
     );
 
     return () => {
       window.removeEventListener(
         "resize",
-        onResize
-      );
-
-      window.removeEventListener(
-        "orientationchange",
-        onResize
+        updateSettings
       );
     };
   }, [isMobile]);
 
-  // ----------------------------------------
-  // MOBILE = NO CANVAS
-  // ----------------------------------------
-
+  // Don't render WebGL on mobile
   if (isMobile) {
     return null;
   }
-
-  // ----------------------------------------
-  // DESKTOP 3D
-  // ----------------------------------------
 
   return (
     <div className="pointer-events-none sticky top-0 z-10 h-screen w-full float-slow">
@@ -449,4 +370,3 @@ export default function Scene() {
   );
 }
 
-useGLTF.preload(MODEL_PATH);

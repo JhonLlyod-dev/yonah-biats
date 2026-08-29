@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 
 export default function Loader() {
@@ -6,99 +7,37 @@ export default function Loader() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    const startTime = performance.now();
-    const minimumTime = 900;
-
     const stages = [
-      { progress: 20, text: "Preparing Razor" },
-      { progress: 45, text: "Fish with confidence" },
-      { progress: 70, text: "Razor-thin profile" },
-      { progress: 90, text: "Almost ready" },
+      { progress: 20, text: "Preparing Razor", delay: 0 },
+      { progress: 45, text: "Fish with confidence", delay: 750 },
+      { progress: 70, text: "Razor-thin profile", delay: 1500 },
+      { progress: 90, text: "Almost ready", delay: 2250 },
     ];
 
-    const timers = stages.map((stage, index) =>
+    const timers = stages.map((stage) =>
       setTimeout(() => {
         setProgress(stage.progress);
         setStatus(stage.text);
-      }, 180 + index * 180)
+      }, stage.delay)
     );
 
-    let pageReady = document.readyState === "complete";
-    let modelReady = false;
-
-    const finish = async () => {
-      if (!pageReady || !modelReady) return;
-
-      const elapsed = performance.now() - startTime;
-      const remaining = Math.max(
-        0,
-        minimumTime - elapsed
-      );
-
-      await new Promise((resolve) =>
-        setTimeout(resolve, remaining)
-      );
-
+    // Finish after exactly 3 seconds
+    const finishTimer = setTimeout(() => {
       setProgress(100);
       setStatus("Ready");
 
-      setTimeout(() => {
+      // Give the "Ready" state a moment before fading out
+      const hideTimer = setTimeout(() => {
         setLoaded(true);
       }, 250);
-    };
 
-    const handlePageLoad = () => {
-      pageReady = true;
-      finish();
-    };
+      timers.push(hideTimer);
+    }, 3000);
 
-    const handleModelReady = () => {
-      modelReady = true;
-      finish();
-    };
-
-    if (!pageReady) {
-      window.addEventListener(
-        "load",
-        handlePageLoad
-      );
-    }
-
-    /*
-     * If the model was already ready before the loader
-     * mounted, don't wait for the event.
-     */
-    if (window.__yonahModelReady) {
-      modelReady = true;
-    }
-
-    window.addEventListener(
-      "yonah:3d-ready",
-      handleModelReady
-    );
-
-    /*
-     * Fallback so the loader doesn't stay forever
-     * if the 3D model fails to report ready.
-     */
-    const fallback = setTimeout(() => {
-      modelReady = true;
-      finish();
-    }, 8000);
+    timers.push(finishTimer);
 
     return () => {
       timers.forEach(clearTimeout);
-      clearTimeout(fallback);
-
-      window.removeEventListener(
-        "load",
-        handlePageLoad
-      );
-
-      window.removeEventListener(
-        "yonah:3d-ready",
-        handleModelReady
-      );
     };
   }, []);
 
@@ -106,7 +45,7 @@ export default function Loader() {
     <div
       aria-label="Loading YONAH"
       role="status"
-      className={`hidden md:flex fixed inset-0 z-999 items-center justify-center overflow-hidden bg-near-black text-warm-white transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${
+      className={`hidden md:flex fixed inset-0 z-[999] items-center justify-center overflow-hidden bg-near-black text-warm-white transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${
         loaded
           ? "pointer-events-none invisible opacity-0"
           : "visible opacity-100"
@@ -164,3 +103,4 @@ export default function Loader() {
     </div>
   );
 }
+

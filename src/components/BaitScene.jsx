@@ -413,8 +413,8 @@ export default function Scene() {
         camera={settings.camera}
         dpr={settings.dpr}
         gl={{
-          antialias: false,
-          powerPreference: "high-performance",
+          antialias: true,
+          alpha: true,
         }}
       >
         <ambientLight

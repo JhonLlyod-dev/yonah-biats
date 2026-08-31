@@ -2,6 +2,9 @@
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import Layout from "../layouts/Layout.astro";
 import ModelView from "../components/ModelView.jsx";
+import { Image } from "astro:assets";
+
+import logo from "../assets/white-logo.webp"
 ---
 
 <Layout>
@@ -32,9 +35,7 @@ import ModelView from "../components/ModelView.jsx";
             Back
           </a>
 
-          <div class="font-heading text-xl font-extrabold uppercase tracking-[-0.06em]">
-            YONAH
-          </div>
+            <Image src={logo} alt="Yonah  Logo" width={165} height={120} class="   w-25 object-contain" format="webp" />
 
           <span class="hidden font-supporting text-[10px] uppercase tracking-[0.18em] text-warm-white/35 sm:block">
             Razor / 3D
@@ -45,7 +46,7 @@ import ModelView from "../components/ModelView.jsx";
 
 
       <!-- MAIN CONTENT -->
-      <section class="relative min-h-screen">
+      <section class="relative min-h-screen ">
 
         <!-- Background glow -->
         <div

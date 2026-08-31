@@ -49,7 +49,7 @@ export default function InteractRazorButton() {
           ? "Loading Razor 3D model"
           : "Interact with the Razor 3D model"
       }
-      data-astro-load
+      data-astro-prefetch
       aria-busy={loading}
       className={`group fixed bottom-1/4 right-3 z-50 flex translate-y-1/4 items-center gap-2 sm:right-5 sm:gap-3 md:right-8 ${
         loading ? "cursor-wait" : "cursor-pointer"

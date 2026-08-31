@@ -1,17 +1,16 @@
-
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
-const MODEL_PATH = "/models/yonah.glb";
+const MODEL_PATH = '/models/yonah.glb'; // ⚠️ update this path if your compressed file lives elsewhere
 const MODEL_SCALE_MULTIPLIER = 0.029;
 
 const KEYFRAMES = [
   {
     at: 0,
     x: 0.2,
-    y: -0.3,
+    y: 0.2,
     z: 3.5,
     rotX: THREE.MathUtils.degToRad(0),
     rotY: THREE.MathUtils.degToRad(-90),
@@ -19,7 +18,7 @@ const KEYFRAMES = [
   {
     at: 0.5,
     x: -0.1,
-    y: -1,
+    y: -0.3,
     z: 3.5,
     rotX: THREE.MathUtils.degToRad(-10),
     rotY: THREE.MathUtils.degToRad(140),
@@ -27,7 +26,7 @@ const KEYFRAMES = [
   {
     at: 1,
     x: 0,
-    y: -0.9,
+    y: 0,
     z: 3.5,
     rotX: THREE.MathUtils.degToRad(-15),
     rotY: THREE.MathUtils.degToRad(-140),
@@ -126,15 +125,17 @@ function Model({ scale, scrollProgress }) {
       dispose={null}
     >
       <group
-        position={[-2.533, 11.364, -1.828]}
-        rotation={[0.845, -0.105, 0.42]}
-        scale={[-234.327, -234.327, -234.328]}
+        position={[-0.325, -11.015, -5.283]}
+        rotation={[-2.297, 0.105, -0.42]}
+        scale={[-234.327, 234.327, 234.328]}
       >
         <mesh
           castShadow
           receiveShadow
           geometry={nodes["0001"].geometry}
           material={materials["Hook.001"]}
+          position={[0, 0.004, -0.018]}
+          scale={0.02}
         />
 
         <mesh
@@ -142,19 +143,23 @@ function Model({ scale, scrollProgress }) {
           receiveShadow
           geometry={nodes["0001_1"].geometry}
           material={materials["Pewterish.001"]}
+          position={[0, 0, -0.018]}
+          scale={0.01}
         />
       </group>
 
       <group
-        position={[-2.263, 20.902, 33.757]}
-        rotation={[0.967, 0.015, -0.058]}
-        scale={-233.327}
+        position={[-0.054, -1.477, 30.302]}
+        rotation={[-2.175, -0.015, 0.058]}
+        scale={[-233.327, 233.327, 233.327]}
       >
         <mesh
           castShadow
           receiveShadow
           geometry={nodes["0003"].geometry}
           material={materials["Hook.001"]}
+          position={[0, 0.004, -0.018]}
+          scale={0.02}
         />
 
         <mesh
@@ -162,38 +167,64 @@ function Model({ scale, scrollProgress }) {
           receiveShadow
           geometry={nodes["0003_1"].geometry}
           material={materials["Pewterish.001"]}
+          position={[0, 0, -0.018]}
+          scale={0.01}
         />
       </group>
 
-      <group position={[-2.283, 22.983, 3.825]}>
+      <group position={[-0.075, 0.604, 0.37]}>
         <mesh
+          castShadow
+          receiveShadow
           geometry={nodes.Razor_Website001.geometry}
           material={materials["Material.007"]}
+          position={[0.023, 1.543, -0.435]}
+          scale={13.898}
         />
 
         <mesh
+          castShadow
+          receiveShadow
           geometry={nodes.Razor_Website001_1.geometry}
           material={materials["Material.008"]}
+          position={[0.025, 4.518, -10.041]}
+          scale={5.881}
         />
 
         <mesh
+          castShadow
+          receiveShadow
           geometry={nodes.Razor_Website001_2.geometry}
           material={materials["Material.009"]}
+          position={[-0.118, -2.632, -21.19]}
+          scale={8.227}
         />
 
         <mesh
+          castShadow
+          receiveShadow
           geometry={nodes.Razor_Website001_3.geometry}
           material={materials["Material.010"]}
+          position={[0.026, -0.56, 4.934]}
+          scale={25.048}
         />
 
         <mesh
+          castShadow
+          receiveShadow
           geometry={nodes.Razor_Website001_4.geometry}
           material={materials["Material.011"]}
+          position={[0.026, 6.901, 3.657]}
+          scale={23.981}
         />
 
         <mesh
+          castShadow
+          receiveShadow
           geometry={nodes.Razor_Website001_5.geometry}
           material={materials["Material.012"]}
+          position={[-0.019, -5.691, 4.947]}
+          scale={26.699}
         />
       </group>
     </group>
@@ -217,7 +248,6 @@ export default function Scene() {
     )
   );
 
-  // Mobile detection
   useEffect(() => {
     const mediaQuery = window.matchMedia(
       "(max-width: 767px)"
@@ -229,28 +259,19 @@ export default function Scene() {
 
     updateMobile();
 
-    mediaQuery.addEventListener(
-      "change",
-      updateMobile
-    );
+    mediaQuery.addEventListener("change", updateMobile);
 
     return () => {
-      mediaQuery.removeEventListener(
-        "change",
-        updateMobile
-      );
+      mediaQuery.removeEventListener("change", updateMobile);
     };
   }, []);
 
-  // Find scroll container
   useEffect(() => {
     if (isMobile) return;
 
-    containerRef.current =
-      document.querySelector("#three-scroll");
+    containerRef.current = document.querySelector("#three-scroll");
   }, [isMobile]);
 
-  // Scroll tracking
   useEffect(() => {
     if (isMobile) return;
 
@@ -259,71 +280,49 @@ export default function Scene() {
 
       if (!container) return;
 
-      const rect =
-        container.getBoundingClientRect();
+      const rect = container.getBoundingClientRect();
 
-      const total =
-        rect.height - window.innerHeight;
+      const total = rect.height - window.innerHeight;
 
       if (total <= 0) {
         scrollProgress.current = 0;
         return;
       }
 
-      const progress =
-        -rect.top / total;
+      const progress = -rect.top / total;
 
-      scrollProgress.current = Math.min(
-        Math.max(progress, 0),
-        1
-      );
+      scrollProgress.current = Math.min(Math.max(progress, 0), 1);
     };
 
     updateScrollProgress();
 
-    window.addEventListener(
-      "scroll",
-      updateScrollProgress,
-      { passive: true }
-    );
+    window.addEventListener("scroll", updateScrollProgress, {
+      passive: true,
+    });
 
     return () => {
-      window.removeEventListener(
-        "scroll",
-        updateScrollProgress
-      );
+      window.removeEventListener("scroll", updateScrollProgress);
     };
   }, [isMobile]);
 
-  // Resize handling
   useEffect(() => {
     if (isMobile) return;
 
     const updateSettings = () => {
       setSettings(
-        getResponsiveSettings(
-          window.innerWidth,
-          window.innerHeight
-        )
+        getResponsiveSettings(window.innerWidth, window.innerHeight)
       );
     };
 
     updateSettings();
 
-    window.addEventListener(
-      "resize",
-      updateSettings
-    );
+    window.addEventListener("resize", updateSettings);
 
     return () => {
-      window.removeEventListener(
-        "resize",
-        updateSettings
-      );
+      window.removeEventListener("resize", updateSettings);
     };
   }, [isMobile]);
 
-  // Don't render WebGL on mobile
   if (isMobile) {
     return null;
   }
@@ -338,10 +337,7 @@ export default function Scene() {
           alpha: true,
         }}
       >
-        <ambientLight
-          intensity={1}
-          color="#ffffff"
-        />
+        <ambientLight intensity={1} color="#ffffff" />
 
         <directionalLight
           position={[5, 5, 5]}
@@ -361,12 +357,8 @@ export default function Scene() {
           color="#ffffff"
         />
 
-        <Model
-          scale={settings.scale}
-          scrollProgress={scrollProgress}
-        />
+        <Model scale={settings.scale} scrollProgress={scrollProgress} />
       </Canvas>
     </div>
   );
 }
-

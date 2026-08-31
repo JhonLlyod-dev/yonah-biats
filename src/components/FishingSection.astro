@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import fishing from "../assets/fishing.png";
 ---
 
 <section
@@ -18,11 +19,12 @@ import { Image } from "astro:assets";
     >
       <!-- Image -->
       <Image
-        src="/fishing.png"
+        src={fishing}
         alt="Angler fishing on the water"
         width={1200}
         height={1200}
         class="absolute inset-0 h-full w-full object-cover"
+        format="webp"
       />
 
       <!-- Image overlay -->

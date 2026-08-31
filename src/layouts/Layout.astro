@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
 
 const siteName = "YONAH Bait Company";
 const siteUrl = "https://yonahbaits.com";
@@ -49,6 +50,8 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500&family=Roboto+Condensed:wght@400;500&display=swap" rel="stylesheet" />
+
+    <ClientRouter />
   </head>
 
   <body>

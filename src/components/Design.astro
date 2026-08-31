@@ -1,3 +1,8 @@
+---
+import {Image} from "astro:assets";
+import yonah3 from "../assets/yonah-3.png";
+---
+
 <section
   id="features"
   class="feature-section relative min-h-screen overflow-hidden bg-near-black px-5 py-20 text-warm-white sm:px-8 sm:py-24 lg:px-12 lg:py-28 xl:px-16"
@@ -75,15 +80,10 @@
 
         <!-- 3D GRAPHIC -->
         <div
-          class="relative z-10 h-[260px] w-full max-w-[320px] bg-transparent sm:h-[320px] sm:max-w-[380px] lg:h-[400px] lg:max-w-[440px]"
+          class="relative z-10 h-[30vh] w-full max-w-[300px] items-center justify-center sm:h-[20vh] sm:max-w-[420px] lg:h-[40vh] lg:max-w-[520px]"
         >
           <!-- For 3D graphics -->
-          <img
-            src="/yonah-1.png"
-            alt="YONAH Razor Flatside Crankbait"
-            class="md:hidden h-full w-full object-contain"
-            loading="eager"
-          />
+          <Image src={yonah3} alt="Hero" width={1650} height={1200} class="md:hidden h-full w-full object-contain" format="webp" />
         </div>
 
       </div>

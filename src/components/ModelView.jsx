@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Canvas, useFrame,useThree  } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   OrbitControls,
   Center,
@@ -11,7 +11,7 @@ import { useGLTF } from "@react-three/drei";
 // MODEL CONTROLS
 // ========================================
 
-const modelScale = .07;
+const modelScale = 0.07;
 
 // X = left / right
 // Y = down / up
@@ -27,20 +27,22 @@ const rotationSpeed = 0.15;
 // ========================================
 
 function Model(props) {
-  const { nodes, materials } = useGLTF("/models/yonah.glb");
+  const { nodes, materials } = useGLTF("/models/yonah.glb"); // ⚠️ update path if needed
 
   return (
     <group {...props} dispose={null}>
       <group
-        position={[-2.533, 11.364, -1.828]}
-        rotation={[0.845, -0.105, 0.42]}
-        scale={[-234.327, -234.327, -234.328]}
+        position={[-0.325, -11.015, -5.283]}
+        rotation={[-2.297, 0.105, -0.42]}
+        scale={[-234.327, 234.327, 234.328]}
       >
         <mesh
           castShadow
           receiveShadow
           geometry={nodes["0001"].geometry}
           material={materials["Hook.001"]}
+          position={[0, 0.004, -0.018]}
+          scale={0.02}
         />
 
         <mesh
@@ -48,19 +50,23 @@ function Model(props) {
           receiveShadow
           geometry={nodes["0001_1"].geometry}
           material={materials["Pewterish.001"]}
+          position={[0, 0, -0.018]}
+          scale={0.01}
         />
       </group>
 
       <group
-        position={[-2.263, 20.902, 33.757]}
-        rotation={[0.967, 0.015, -0.058]}
-        scale={-233.327}
+        position={[-0.054, -1.477, 30.302]}
+        rotation={[-2.175, -0.015, 0.058]}
+        scale={[-233.327, 233.327, 233.327]}
       >
         <mesh
           castShadow
           receiveShadow
           geometry={nodes["0003"].geometry}
           material={materials["Hook.001"]}
+          position={[0, 0.004, -0.018]}
+          scale={0.02}
         />
 
         <mesh
@@ -68,15 +74,19 @@ function Model(props) {
           receiveShadow
           geometry={nodes["0003_1"].geometry}
           material={materials["Pewterish.001"]}
+          position={[0, 0, -0.018]}
+          scale={0.01}
         />
       </group>
 
-      <group position={[-2.283, 22.983, 3.825]}>
+      <group position={[-0.075, 0.604, 0.37]}>
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.Razor_Website001.geometry}
           material={materials["Material.007"]}
+          position={[0.023, 1.543, -0.435]}
+          scale={13.898}
         />
 
         <mesh
@@ -84,6 +94,8 @@ function Model(props) {
           receiveShadow
           geometry={nodes.Razor_Website001_1.geometry}
           material={materials["Material.008"]}
+          position={[0.025, 4.518, -10.041]}
+          scale={5.881}
         />
 
         <mesh
@@ -91,6 +103,8 @@ function Model(props) {
           receiveShadow
           geometry={nodes.Razor_Website001_2.geometry}
           material={materials["Material.009"]}
+          position={[-0.118, -2.632, -21.19]}
+          scale={8.227}
         />
 
         <mesh
@@ -98,6 +112,8 @@ function Model(props) {
           receiveShadow
           geometry={nodes.Razor_Website001_3.geometry}
           material={materials["Material.010"]}
+          position={[0.026, -0.56, 4.934]}
+          scale={25.048}
         />
 
         <mesh
@@ -105,6 +121,8 @@ function Model(props) {
           receiveShadow
           geometry={nodes.Razor_Website001_4.geometry}
           material={materials["Material.011"]}
+          position={[0.026, 6.901, 3.657]}
+          scale={23.981}
         />
 
         <mesh
@@ -112,6 +130,8 @@ function Model(props) {
           receiveShadow
           geometry={nodes.Razor_Website001_5.geometry}
           material={materials["Material.012"]}
+          position={[-0.019, -5.691, 4.947]}
+          scale={26.699}
         />
       </group>
     </group>
@@ -195,4 +215,4 @@ export default function ModelView() {
   );
 }
 
-useGLTF.preload("/models/yonah.glb");
+useGLTF.preload("/models/yonah.glb"); // ⚠️ update path if needed

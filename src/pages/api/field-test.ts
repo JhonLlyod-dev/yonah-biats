@@ -6,7 +6,7 @@ export const prerender = false;
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const TO_ADDRESS = 'sam@thomasmarketing.solutions';
+const TO_ADDRESS = 'info@yonahbaits.com';
 const FROM_ADDRESS = 'field-test@yonahbaits.com'; // swap for a domain verified in your Resend account when ready
 
 export const POST: APIRoute = async ({ request }) => {

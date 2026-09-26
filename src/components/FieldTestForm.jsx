@@ -131,14 +131,14 @@ export default function FieldTestForm() {
 
         <button
           type="submit"
-          className="group relative mt-4 flex w-full items-center justify-between overflow-hidden bg-warm-white px-5 py-4 font-supporting text-xs uppercase tracking-[0.12em] text-near-black transition-colors duration-300 hover:text-near-black"
+          className="group relative mt-4 flex w-full items-center justify-between overflow-hidden bg-warm-white px-5 py-4 font-supporting text-xs uppercase tracking-[0.12em] text-near-black transition-colors duration-300 cursor-pointer hover:text-near-black"
         >
           <span className="absolute inset-x-0 bottom-0 h-0 bg-chartreuse transition-[height] duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:h-full" />
           <span className="relative z-10">Apply to test the Razor</span>
           <ArrowUpRight
             size={17}
             strokeWidth={1.7}
-            className="relative z-10 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
+            className="relative z-10 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 "
           />
         </button>
 
